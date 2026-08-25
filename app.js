@@ -9,9 +9,9 @@
 
 const products = [
 
-    /* =========================
-       WWE
-    ========================= */
+    /* =====================================================
+       COLLECTION 001 — WWE
+    ===================================================== */
 
     {
         id: "undertaker",
@@ -104,9 +104,9 @@ const products = [
     },
 
 
-    /* =========================
-       NARUTO
-    ========================= */
+    /* =====================================================
+       COLLECTION 002 — NARUTO
+    ===================================================== */
 
     {
         id: "akatsuki",
@@ -114,7 +114,7 @@ const products = [
         image: "assets/akatsuki.png",
         collection: "COLLECTION 002 / NARUTO",
         collectionId: "NARUTO",
-        description: "Una organización. Nueve sombras. Una identidad.",
+        description: "Una organización. Nueve sombras. Una misma identidad.",
         type: "playera"
     },
 
@@ -239,9 +239,13 @@ const prices = {
 ========================================================= */
 
 let currentProduct = null;
+
 let currentType = "playera";
+
 let currentFilter = "all";
+
 let currentCollection = "all";
+
 let currentSize = "M";
 
 
@@ -256,28 +260,35 @@ function renderProducts() {
     productGrid.innerHTML = "";
 
 
-    let filteredProducts = products.filter(product => {
+    const filteredProducts = products.filter(product => {
 
-        const matchesCollection =
+        const collectionMatch =
             currentCollection === "all" ||
             product.collectionId === currentCollection;
 
-        const matchesType =
+
+        const typeMatch =
             currentFilter === "all" ||
             product.type === currentFilter;
 
-        return matchesCollection && matchesType;
+
+        return collectionMatch && typeMatch;
 
     });
 
 
     filteredProducts.forEach((product, index) => {
 
-        const card = document.createElement("article");
+        const card =
+            document.createElement("article");
 
-        card.className = "product-card reveal";
 
-        card.dataset.type = product.type;
+        card.className =
+            "product-card reveal";
+
+
+        card.dataset.type =
+            product.type;
 
 
         card.innerHTML = `
@@ -321,7 +332,7 @@ function renderProducts() {
                         </span>
 
                         <strong>
-                            $280
+                            $${prices.playera}
                         </strong>
 
                     </div>
@@ -338,7 +349,10 @@ function renderProducts() {
     });
 
 
-    updateShopCount(filteredProducts.length);
+    updateShopCount(
+        filteredProducts.length
+    );
+
 
     initializeReveal();
 
@@ -346,14 +360,17 @@ function renderProducts() {
 
 
 /* =========================================================
-   CONTADOR
+   CONTADOR SHOP
 ========================================================= */
 
 function updateShopCount(count) {
 
-    const counter = document.querySelector(".shop-count");
+    const counter =
+        document.querySelector(".shop-count");
+
 
     if (!counter) return;
+
 
     counter.textContent =
         String(count).padStart(2, "0") +
@@ -368,9 +385,11 @@ function updateShopCount(count) {
 
 function openProduct(productId) {
 
-    const product = products.find(
-        item => item.id === productId
-    );
+    const product =
+        products.find(
+            item => item.id === productId
+        );
+
 
     if (!product || !productModal) return;
 
@@ -378,23 +397,32 @@ function openProduct(productId) {
     currentProduct = product;
 
     currentType = "playera";
+
     currentSize = "M";
 
 
-    modalImage.src = product.image;
-    modalImage.alt = product.name;
+    modalImage.src =
+        product.image;
+
+
+    modalImage.alt =
+        product.name;
+
 
     modalCollection.textContent =
         product.collection;
 
+
     modalName.textContent =
         product.name;
+
 
     modalDescription.textContent =
         product.description;
 
 
     updateProductTypeButtons();
+
     updateSizeButtons();
 
 
@@ -413,6 +441,7 @@ function closeProduct() {
 
     if (!productModal) return;
 
+
     productModal.classList.remove("open");
 
     document.body.classList.remove("modal-open");
@@ -421,18 +450,21 @@ function closeProduct() {
 
 
 /* =========================================================
-   TIPO DE PRODUCTO
+   PRODUCTO / PRECIO
 ========================================================= */
 
 function updateProductTypeButtons() {
 
     const typeButtons =
-        document.querySelectorAll(".type-button");
+        document.querySelectorAll(
+            ".type-button"
+        );
 
 
     typeButtons.forEach(button => {
 
-        const type = button.dataset.type;
+        const type =
+            button.dataset.type;
 
 
         button.classList.toggle(
@@ -475,25 +507,30 @@ function updateProductTypeButtons() {
 
 
 /* =========================================================
-   PLAYERA / SUDADERA
+   BOTONES PLAYERA / SUDADERA
 ========================================================= */
 
-document.addEventListener("click", event => {
+document.addEventListener(
+    "click",
+    event => {
 
-    const button =
-        event.target.closest(".type-button");
-
-
-    if (!button) return;
-
-
-    currentType =
-        button.dataset.type;
+        const button =
+            event.target.closest(
+                ".type-button"
+            );
 
 
-    updateProductTypeButtons();
+        if (!button) return;
 
-});
+
+        currentType =
+            button.dataset.type;
+
+
+        updateProductTypeButtons();
+
+    }
+);
 
 
 /* =========================================================
@@ -506,14 +543,17 @@ function updateSizeButtons() {
 
 
     const sizeButtons =
-        sizes.querySelectorAll("button");
+        sizes.querySelectorAll(
+            "button"
+        );
 
 
     sizeButtons.forEach(button => {
 
         button.classList.toggle(
             "active",
-            button.textContent.trim() === currentSize
+            button.textContent.trim() ===
+            currentSize
         );
 
     });
@@ -523,22 +563,27 @@ function updateSizeButtons() {
 
 if (sizes) {
 
-    sizes.addEventListener("click", event => {
+    sizes.addEventListener(
+        "click",
+        event => {
 
-        const button =
-            event.target.closest("button");
-
-
-        if (!button) return;
-
-
-        currentSize =
-            button.textContent.trim();
+            const button =
+                event.target.closest(
+                    "button"
+                );
 
 
-        updateSizeButtons();
+            if (!button) return;
 
-    });
+
+            currentSize =
+                button.textContent.trim();
+
+
+            updateSizeButtons();
+
+        }
+    );
 
 }
 
@@ -549,42 +594,45 @@ if (sizes) {
 
 if (preorderBtn) {
 
-    preorderBtn.addEventListener("click", () => {
+    preorderBtn.addEventListener(
+        "click",
+        () => {
 
-        if (!currentProduct) return;
-
-
-        const price =
-            prices[currentType];
+            if (!currentProduct) return;
 
 
-        const typeName =
-            currentType === "playera"
-                ? "Playera"
-                : "Sudadera";
+            const price =
+                prices[currentType];
 
 
-        const message =
-            `Hola SWEETPAIN 👋\n\n` +
-            `Quiero hacer un PRE-ORDER.\n\n` +
-            `Producto: ${currentProduct.name}\n` +
-            `Colección: ${currentProduct.collection}\n` +
-            `Tipo: ${typeName}\n` +
-            `Talla: ${currentSize}\n` +
-            `Precio: $${price} MXN\n\n` +
-            `Gracias.`;
+            const typeName =
+                currentType === "playera"
+                    ? "Playera"
+                    : "Sudadera";
 
 
-        const whatsappURL =
-            `https://wa.me/525665897458?text=${encodeURIComponent(message)}`;
+            const message =
+                `Hola SWEETPAIN 👋\n\n` +
+                `Quiero hacer un PRE-ORDER.\n\n` +
+                `Producto: ${currentProduct.name}\n` +
+                `Colección: ${currentProduct.collection}\n` +
+                `Tipo: ${typeName}\n` +
+                `Talla: ${currentSize}\n` +
+                `Precio: $${price} MXN\n\n` +
+                `Gracias.`;
 
 
-        window.open(
-            whatsappURL,
-            "_blank"
-        );
+            const whatsappURL =
+                `https://wa.me/525665897458?text=${encodeURIComponent(message)}`;
 
-    });
+
+            window.open(
+                whatsappURL,
+                "_blank"
+            );
+
+        }
+    );
 
 }
 
@@ -594,30 +642,41 @@ if (preorderBtn) {
 ========================================================= */
 
 const filterButtons =
-    document.querySelectorAll(".filter");
+    document.querySelectorAll(
+        ".filter"
+    );
 
 
 filterButtons.forEach(button => {
 
-    button.addEventListener("click", () => {
+    button.addEventListener(
+        "click",
+        () => {
 
-        currentFilter =
-            button.dataset.filter;
-
-
-        filterButtons.forEach(item => {
-
-            item.classList.remove("active");
-
-        });
+            currentFilter =
+                button.dataset.filter;
 
 
-        button.classList.add("active");
+            filterButtons.forEach(
+                item => {
+
+                    item.classList.remove(
+                        "active"
+                    );
+
+                }
+            );
 
 
-        renderProducts();
+            button.classList.add(
+                "active"
+            );
 
-    });
+
+            renderProducts();
+
+        }
+    );
 
 });
 
@@ -628,28 +687,23 @@ filterButtons.forEach(button => {
 
 function filterCollection(collection) {
 
-    if (
-        collection !== "WWE" &&
-        collection !== "NARUTO"
-    ) {
-
-        showComingSoon(collection);
-
-        return;
-
-    }
+    currentCollection =
+        collection;
 
 
-    currentCollection = collection;
+    currentFilter =
+        "all";
 
-    currentFilter = "all";
 
+    filterButtons.forEach(
+        button => {
 
-    filterButtons.forEach(button => {
+            button.classList.remove(
+                "active"
+            );
 
-        button.classList.remove("active");
-
-    });
+        }
+    );
 
 
     const allButton =
@@ -660,7 +714,9 @@ function filterCollection(collection) {
 
     if (allButton) {
 
-        allButton.classList.add("active");
+        allButton.classList.add(
+            "active"
+        );
 
     }
 
@@ -669,7 +725,9 @@ function filterCollection(collection) {
 
 
     const shop =
-        document.getElementById("shop");
+        document.getElementById(
+            "shop"
+        );
 
 
     if (shop) {
@@ -684,62 +742,47 @@ function filterCollection(collection) {
 
 
 /* =========================================================
-   COMING SOON
-========================================================= */
-
-function showComingSoon(collection) {
-
-    /*
-       NARUTO YA ESTÁ DISPONIBLE.
-       Esto permite que el HTML actual,
-       que todavía llama showComingSoon('NARUTO'),
-       funcione sin modificarlo.
-    */
-
-    if (collection === "NARUTO") {
-
-        filterCollection("NARUTO");
-
-        return;
-
-    }
-
-
-    alert(
-        `${collection}\n\n` +
-        `PRÓXIMAMENTE.\n\n` +
-        `SWEETPAIN`
-    );
-
-}
-
-
-/* =========================================================
    MENÚ MOBILE
 ========================================================= */
 
 if (menuButton && mobileMenu) {
 
-    menuButton.addEventListener("click", () => {
+    menuButton.addEventListener(
+        "click",
+        () => {
 
-        mobileMenu.classList.add("open");
+            mobileMenu.classList.add(
+                "open"
+            );
 
-        document.body.classList.add("menu-open");
 
-    });
+            document.body.classList.add(
+                "menu-open"
+            );
+
+        }
+    );
 
 }
 
 
 if (mobileClose && mobileMenu) {
 
-    mobileClose.addEventListener("click", () => {
+    mobileClose.addEventListener(
+        "click",
+        () => {
 
-        mobileMenu.classList.remove("open");
+            mobileMenu.classList.remove(
+                "open"
+            );
 
-        document.body.classList.remove("menu-open");
 
-    });
+            document.body.classList.remove(
+                "menu-open"
+            );
+
+        }
+    );
 
 }
 
@@ -751,18 +794,28 @@ if (mobileClose && mobileMenu) {
 if (mobileMenu) {
 
     const mobileLinks =
-        mobileMenu.querySelectorAll("a");
+        mobileMenu.querySelectorAll(
+            "a"
+        );
 
 
     mobileLinks.forEach(link => {
 
-        link.addEventListener("click", () => {
+        link.addEventListener(
+            "click",
+            () => {
 
-            mobileMenu.classList.remove("open");
+                mobileMenu.classList.remove(
+                    "open"
+                );
 
-            document.body.classList.remove("menu-open");
 
-        });
+                document.body.classList.remove(
+                    "menu-open"
+                );
+
+            }
+        );
 
     });
 
@@ -773,51 +826,68 @@ if (mobileMenu) {
    ESC
 ========================================================= */
 
-document.addEventListener("keydown", event => {
+document.addEventListener(
+    "keydown",
+    event => {
 
-    if (event.key === "Escape") {
+        if (event.key === "Escape") {
 
-        closeProduct();
+            closeProduct();
 
 
-        if (mobileMenu) {
+            if (mobileMenu) {
 
-            mobileMenu.classList.remove("open");
+                mobileMenu.classList.remove(
+                    "open"
+                );
+
+            }
+
+
+            document.body.classList.remove(
+                "menu-open"
+            );
 
         }
 
-
-        document.body.classList.remove("menu-open");
-
     }
-
-});
+);
 
 
 /* =========================================================
    INTRO
 ========================================================= */
 
-window.addEventListener("load", () => {
+window.addEventListener(
+    "load",
+    () => {
 
-    setTimeout(() => {
+        setTimeout(
+            () => {
 
-        if (intro) {
+                if (intro) {
 
-            intro.classList.add("hidden");
+                    intro.classList.add(
+                        "hidden"
+                    );
 
-        }
+                }
 
 
-        if (siteHeader) {
+                if (siteHeader) {
 
-            siteHeader.classList.add("visible");
+                    siteHeader.classList.add(
+                        "visible"
+                    );
 
-        }
+                }
 
-    }, 1800);
+            },
+            1800
+        );
 
-});
+    }
+);
 
 
 /* =========================================================
@@ -832,13 +902,19 @@ function initializeReveal() {
         );
 
 
-    if (!("IntersectionObserver" in window)) {
+    if (
+        !("IntersectionObserver" in window)
+    ) {
 
-        elements.forEach(element => {
+        elements.forEach(
+            element => {
 
-            element.classList.add("visible");
+                element.classList.add(
+                    "visible"
+                );
 
-        });
+            }
+        );
 
         return;
 
@@ -849,19 +925,26 @@ function initializeReveal() {
         new IntersectionObserver(
             entries => {
 
-                entries.forEach(entry => {
+                entries.forEach(
+                    entry => {
 
-                    if (entry.isIntersecting) {
+                        if (
+                            entry.isIntersecting
+                        ) {
 
-                        entry.target.classList.add("visible");
+                            entry.target.classList.add(
+                                "visible"
+                            );
 
-                        observer.unobserve(
-                            entry.target
-                        );
+
+                            observer.unobserve(
+                                entry.target
+                            );
+
+                        }
 
                     }
-
-                });
+                );
 
             },
             {
@@ -870,11 +953,15 @@ function initializeReveal() {
         );
 
 
-    elements.forEach(element => {
+    elements.forEach(
+        element => {
 
-        observer.observe(element);
+            observer.observe(
+                element
+            );
 
-    });
+        }
+    );
 
 }
 
@@ -906,7 +993,4 @@ window.closeProduct =
     closeProduct;
 
 window.filterCollection =
-    filterCollection;
-
-window.showComingSoon =
-    showComingSoon; 
+    filterCollection; 
