@@ -296,7 +296,7 @@ function openProduct(productId) {
     updateSizeButtons();
 
 
-    productModal.classList.add("active");
+    productModal.classList.add("open");
 
     document.body.classList.add("modal-open");
 
@@ -311,7 +311,7 @@ function closeProduct() {
 
     if (!productModal) return;
 
-    productModal.classList.remove("active");
+    productModal.classList.remove("open");
 
     document.body.classList.remove("modal-open");
 
@@ -448,34 +448,24 @@ if (preorderBtn) {
 
         if (!currentProduct) return;
 
+        const price = prices[currentType];
 
-        const price =
-            prices[currentType];
-
+        const typeName =
+            currentType === "playera"
+                ? "Playera"
+                : "Sudadera";
 
         const message =
-
-            `Hola SWEETPAIN 👋%0A%0A` +
-
-            `Quiero hacer un PRE-ORDER.%0A%0A` +
-
-            `Producto: ${currentProduct.name}%0A` +
-
-            `Tipo: ${currentType === "playera"
-                ? "Playera"
-                : "Sudadera"}%0A` +
-
-            `Talla: ${currentSize}%0A` +
-
-            `Precio: $${price} MXN%0A%0A` +
-
+            `Hola SWEETPAIN 👋\n\n` +
+            `Quiero hacer un PRE-ORDER.\n\n` +
+            `Producto: ${currentProduct.name}\n` +
+            `Tipo: ${typeName}\n` +
+            `Talla: ${currentSize}\n` +
+            `Precio: $${price} MXN\n\n` +
             `Gracias.`;
 
-
-
         const whatsappURL =
-            `https://wa.me/525665897458?text=${message}`;
-
+            `https://wa.me/525665897458?text=${encodeURIComponent(message)}`;
 
         window.open(
             whatsappURL,
@@ -597,7 +587,7 @@ if (menuButton && mobileMenu) {
 
     menuButton.addEventListener("click", () => {
 
-        mobileMenu.classList.add("active");
+        mobileMenu.classList.add("open");
 
         document.body.classList.add("menu-open");
 
@@ -610,7 +600,7 @@ if (mobileClose && mobileMenu) {
 
     mobileClose.addEventListener("click", () => {
 
-        mobileMenu.classList.remove("active");
+        mobileMenu.classList.remove("open");
 
         document.body.classList.remove("menu-open");
 
@@ -633,7 +623,7 @@ if (mobileMenu) {
 
         link.addEventListener("click", () => {
 
-            mobileMenu.classList.remove("active");
+            mobileMenu.classList.remove("open");
 
             document.body.classList.remove("menu-open");
 
@@ -657,7 +647,7 @@ document.addEventListener("keydown", event => {
 
         if (mobileMenu) {
 
-            mobileMenu.classList.remove("active");
+            mobileMenu.classList.remove("open");
 
         }
 
