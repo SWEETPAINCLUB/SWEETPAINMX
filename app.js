@@ -1,11 +1,13 @@
 /* =========================================================
    SWEETPAIN — APP.JS
+   STREETWEAR / MYTHOLOGY
+   VERSION REBUILT
    ========================================================= */
 
 
 /* =========================================================
    PRODUCTOS
-========================================================= */
+   ========================================================= */
 
 const products = [
 
@@ -14,7 +16,8 @@ const products = [
         name: "SWEETPAIN X UNDERTAKER",
         image: "assets/undertaker.png",
         collection: "COLLECTION 001 / WWE",
-        description: "Artefacto inspirado en una de las figuras más icónicas de la era WWE.",
+        description:
+            "Artefacto inspirado en una de las figuras más icónicas de la era WWE.",
         type: "playera"
     },
 
@@ -23,7 +26,8 @@ const products = [
         name: "SWEETPAIN X STONE COLD",
         image: "assets/stone-cold.png",
         collection: "COLLECTION 001 / WWE",
-        description: "Actitud, presencia y una era que marcó la historia.",
+        description:
+            "Actitud, presencia y una era que marcó la historia.",
         type: "playera"
     },
 
@@ -32,7 +36,8 @@ const products = [
         name: "SWEETPAIN X TRIPLE H",
         image: "assets/triple-h.png",
         collection: "COLLECTION 001 / WWE",
-        description: "Una pieza inspirada en una de las grandes figuras de la lucha libre.",
+        description:
+            "Una pieza inspirada en una de las grandes figuras de la lucha libre.",
         type: "playera"
     },
 
@@ -41,7 +46,8 @@ const products = [
         name: "SWEETPAIN X HBK",
         image: "assets/hbk.png",
         collection: "COLLECTION 001 / WWE",
-        description: "Heartbreak. Presencia. Legado.",
+        description:
+            "Heartbreak. Presencia. Legado.",
         type: "playera"
     },
 
@@ -50,7 +56,8 @@ const products = [
         name: "SWEETPAIN X THE ROCK",
         image: "assets/the-rock.png",
         collection: "COLLECTION 001 / WWE",
-        description: "Una pieza para quienes entienden lo que significa tener presencia.",
+        description:
+            "Una pieza para quienes entienden lo que significa tener presencia.",
         type: "playera"
     },
 
@@ -59,7 +66,8 @@ const products = [
         name: "SWEETPAIN X EDDIE GUERRERO",
         image: "assets/eddie-guerrero.png",
         collection: "COLLECTION 001 / WWE",
-        description: "Una reinterpretación SweetPain de una era inolvidable.",
+        description:
+            "Una reinterpretación SweetPain de una era inolvidable.",
         type: "playera"
     },
 
@@ -68,7 +76,8 @@ const products = [
         name: "SWEETPAIN X REY MYSTERIO",
         image: "assets/rey-mysterio.png",
         collection: "COLLECTION 001 / WWE",
-        description: "619. Máscara. Legado.",
+        description:
+            "619. Máscara. Legado.",
         type: "playera"
     },
 
@@ -77,7 +86,8 @@ const products = [
         name: "SWEETPAIN X KANE",
         image: "assets/kane.png",
         collection: "COLLECTION 001 / WWE",
-        description: "Una presencia imposible de ignorar.",
+        description:
+            "Una presencia imposible de ignorar.",
         type: "playera"
     },
 
@@ -86,7 +96,8 @@ const products = [
         name: "SWEETPAIN X JEFF HARDY",
         image: "assets/jeff-hardy.png",
         collection: "COLLECTION 001 / WWE",
-        description: "Caos, libertad y una identidad completamente propia.",
+        description:
+            "Caos, libertad y una identidad completamente propia.",
         type: "playera"
     }
 
@@ -94,97 +105,156 @@ const products = [
 
 
 /* =========================================================
-   ELEMENTOS
-========================================================= */
+   CONFIGURACIÓN
+   ========================================================= */
 
-const productGrid = document.getElementById("productGrid");
-
-const productModal = document.getElementById("productModal");
-
-const modalImage = document.getElementById("modalImage");
-
-const modalCollection = document.getElementById("modalCollection");
-
-const modalName = document.getElementById("modalName");
-
-const modalDescription = document.getElementById("modalDescription");
-
-const preorderBtn = document.getElementById("preorderBtn");
-
-const sizes = document.getElementById("sizes");
-
-const menuButton = document.getElementById("menuButton");
-
-const mobileMenu = document.getElementById("mobileMenu");
-
-const mobileClose = document.getElementById("mobileClose");
-
-const intro = document.getElementById("intro");
-
-const siteHeader = document.getElementById("siteHeader");
-
-
-/* =========================================================
-   PRECIOS
-========================================================= */
-
-const prices = {
-
+const PRICES = {
     playera: 280,
-
     sudadera: 450
-
 };
+
+const WHATSAPP_NUMBER = "525665897458";
 
 
 /* =========================================================
    ESTADO
-========================================================= */
+   ========================================================= */
 
 let currentProduct = null;
-
 let currentType = "playera";
-
-let currentFilter = "all";
-
 let currentSize = "M";
+let currentFilter = "all";
 
 
 /* =========================================================
-   RENDER PRODUCTOS
+   ELEMENTOS
+   ========================================================= */
+
+const productGrid =
+    document.getElementById("productGrid");
+
+const productModal =
+    document.getElementById("productModal");
+
+const modalImage =
+    document.getElementById("modalImage");
+
+const modalCollection =
+    document.getElementById("modalCollection");
+
+const modalName =
+    document.getElementById("modalName");
+
+const modalDescription =
+    document.getElementById("modalDescription");
+
+const preorderBtn =
+    document.getElementById("preorderBtn");
+
+const sizesContainer =
+    document.getElementById("sizes");
+
+const menuButton =
+    document.getElementById("menuButton");
+
+const mobileMenu =
+    document.getElementById("mobileMenu");
+
+const mobileClose =
+    document.getElementById("mobileClose");
+
+const intro =
+    document.getElementById("intro");
+
+const siteHeader =
+    document.getElementById("siteHeader");
+
+
+/* =========================================================
+   HELPERS
+   ========================================================= */
+
+function $(selector) {
+    return document.querySelector(selector);
+}
+
+
+function $$(selector) {
+    return document.querySelectorAll(selector);
+}
+
+
+/* =========================================================
+   SHOP — CONTADOR
+   ========================================================= */
+
+function updateShopCount(count) {
+
+    const counter =
+        $(".shop-count");
+
+    if (!counter) return;
+
+    counter.textContent =
+        `${String(count).padStart(2, "0")} ARTEFACTOS`;
+
+}
+
+
+/* =========================================================
+   SHOP — RENDER
 ========================================================= */
 
 function renderProducts(filter = "all") {
 
     if (!productGrid) return;
 
+    currentFilter = filter;
+
+    /*
+       IMPORTANTE:
+
+       Esta función SOLO modifica #productGrid.
+
+       Nunca toca:
+       - collections
+       - collection-grid
+       - collection-feature
+       - hero
+       - manifesto
+       - header
+    */
+
+    const filteredProducts =
+        filter === "all"
+            ? products
+            : products.filter(
+                product => product.type === filter
+            );
+
+
     productGrid.innerHTML = "";
-
-    let filteredProducts = products;
-
-    if (filter !== "all") {
-
-        filteredProducts = products.filter(
-            product => product.type === filter
-        );
-
-    }
 
 
     filteredProducts.forEach((product, index) => {
 
-        const card = document.createElement("article");
+        const card =
+            document.createElement("article");
 
-        card.className = "product-card reveal";
+        card.className =
+            "product-card reveal";
 
-        card.dataset.type = product.type;
 
+        /*
+           Usamos las clases que YA existen
+           en tu CSS.
+        */
 
         card.innerHTML = `
 
             <button
+                type="button"
                 class="product-card-button"
-                onclick="openProduct('${product.id}')"
                 aria-label="Ver ${product.name}"
             >
 
@@ -199,31 +269,33 @@ function renderProducts(filter = "all") {
                 </div>
 
 
-                <div class="product-info">
+                <div class="product-copy">
 
-                    <div>
+                    <span class="product-index">
+                        ${String(index + 1).padStart(2, "0")}
+                    </span>
 
-                        <span class="product-collection">
-                            ${product.collection}
+
+                    <h3 class="product-name">
+                        ${product.name}
+                    </h3>
+
+
+                    <div class="product-prices">
+
+                        <span>
+                            PLAYERA / SUDADERA
                         </span>
 
-                        <h3>
-                            ${product.name}
-                        </h3>
+                        <strong>
+                            DESDE $${PRICES.playera}
+                        </strong>
 
                     </div>
 
 
-                    <div class="product-price">
-
-                        <span>
-                            DESDE
-                        </span>
-
-                        <strong>
-                            $280
-                        </strong>
-
+                    <div class="product-status">
+                        BAJO PEDIDO
                     </div>
 
                 </div>
@@ -233,43 +305,228 @@ function renderProducts(filter = "all") {
         `;
 
 
+        /*
+           Abrimos el producto sin usar
+           onclick inline.
+        */
+
+        const button =
+            card.querySelector(
+                ".product-card-button"
+            );
+
+
+        if (button) {
+
+            button.addEventListener(
+                "click",
+                () => openProduct(product.id)
+            );
+
+        }
+
+
+        /*
+           Si la imagen no existe,
+           solamente ocultamos esa imagen.
+           No rompemos el resto del sitio.
+        */
+
+        const image =
+            card.querySelector("img");
+
+
+        if (image) {
+
+            image.addEventListener(
+                "error",
+                () => {
+
+                    image.style.display = "none";
+
+                }
+            );
+
+        }
+
+
         productGrid.appendChild(card);
 
     });
 
 
-    updateShopCount(filteredProducts.length);
+    updateShopCount(
+        filteredProducts.length
+    );
+
+
+    /*
+       Las tarjetas se generan después
+       de cargar la página, así que
+       necesitamos inicializar sus reveals.
+    */
+
+    initializeReveal(
+        productGrid.querySelectorAll(".reveal")
+    );
 
 }
 
 
 /* =========================================================
-   CONTADOR SHOP
-========================================================= */
+   SHOP — FILTROS
+   ========================================================= */
 
-function updateShopCount(count) {
+function updateFilterButtons(filter) {
 
-    const counter = document.querySelector(".shop-count");
+    const buttons =
+        $$(".filter");
 
-    if (!counter) return;
 
-    counter.textContent =
-        String(count).padStart(2, "0") + " ARTEFACTOS";
+    buttons.forEach(button => {
+
+        button.classList.toggle(
+            "active",
+            button.dataset.filter === filter
+        );
+
+    });
+
+}
+
+
+function setupFilters() {
+
+    const buttons =
+        $$(".filter");
+
+
+    buttons.forEach(button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                const filter =
+                    button.dataset.filter || "all";
+
+
+                updateFilterButtons(filter);
+
+                renderProducts(filter);
+
+            }
+        );
+
+    });
 
 }
 
 
 /* =========================================================
-   ABRIR PRODUCTO
-========================================================= */
+   COLECCIONES
+   ========================================================= */
+
+function filterCollection(collection) {
+
+    /*
+       MUY IMPORTANTE:
+
+       NO hacemos innerHTML en collections.
+
+       NO reconstruimos las tarjetas.
+
+       NO eliminamos imágenes.
+
+       Solamente seleccionamos el filtro
+       correspondiente y llevamos al usuario
+       al Shop.
+    */
+
+
+    if (
+        !collection ||
+        collection.toUpperCase() !== "WWE"
+    ) {
+
+        return;
+
+    }
+
+
+    const shop =
+        document.getElementById("shop");
+
+
+    /*
+       WWE actualmente contiene los 9
+       productos de la colección.
+       Por eso mostramos TODO.
+    */
+
+    currentFilter = "all";
+
+
+    updateFilterButtons("all");
+
+    renderProducts("all");
+
+
+    if (!shop) return;
+
+
+    /*
+       Esperamos un frame para que el navegador
+       termine de pintar el grid antes de hacer
+       scroll.
+    */
+
+    requestAnimationFrame(() => {
+
+        shop.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+    });
+
+}
+
+
+/* =========================================================
+   COMING SOON
+   ========================================================= */
+
+function showComingSoon(collection) {
+
+    const number =
+        collection === "NARUTO"
+            ? "002"
+            : "003";
+
+
+    showToast(
+        `${collection} — COLLECTION ${number} / PRÓXIMAMENTE`
+    );
+
+}
+
+
+/* =========================================================
+   MODAL — ABRIR
+   ========================================================= */
 
 function openProduct(productId) {
 
-    const product = products.find(
-        item => item.id === productId
-    );
+    const product =
+        products.find(
+            item => item.id === productId
+        );
 
-    if (!product || !productModal) return;
+
+    if (!product) return;
+
+    if (!productModal) return;
 
 
     currentProduct = product;
@@ -279,16 +536,50 @@ function openProduct(productId) {
     currentSize = "M";
 
 
-    modalImage.src = product.image;
+    /*
+       Imagen
+    */
 
-    modalImage.alt = product.name;
+    if (modalImage) {
 
-    modalCollection.textContent = product.collection;
+        modalImage.src =
+            product.image;
 
-    modalName.textContent = product.name;
+        modalImage.alt =
+            product.name;
 
-    modalDescription.textContent =
-        product.description;
+        modalImage.style.display =
+            "block";
+
+    }
+
+
+    /*
+       Información
+    */
+
+    if (modalCollection) {
+
+        modalCollection.textContent =
+            product.collection;
+
+    }
+
+
+    if (modalName) {
+
+        modalName.textContent =
+            product.name;
+
+    }
+
+
+    if (modalDescription) {
+
+        modalDescription.textContent =
+            product.description;
+
+    }
 
 
     updateProductTypeButtons();
@@ -300,37 +591,58 @@ function openProduct(productId) {
 
     document.body.classList.add("modal-open");
 
+
+    /*
+       Evitamos que el fondo se mueva
+       mientras el modal está abierto.
+    */
+
+    document.body.style.overflow =
+        "hidden";
+
 }
 
 
 /* =========================================================
-   CERRAR PRODUCTO
-========================================================= */
+   MODAL — CERRAR
+   ========================================================= */
 
 function closeProduct() {
 
     if (!productModal) return;
 
+
     productModal.classList.remove("open");
 
-    document.body.classList.remove("modal-open");
+    document.body.classList.remove(
+        "modal-open"
+    );
+
+
+    document.body.style.overflow =
+        "";
+
+
+    currentProduct = null;
 
 }
 
 
 /* =========================================================
-   TIPO DE PRODUCTO
-========================================================= */
+   MODAL — TIPO DE PRODUCTO
+   ========================================================= */
 
 function updateProductTypeButtons() {
 
-    const typeButtons =
-        document.querySelectorAll(".type-button");
+    const buttons =
+        $$(".type-button");
 
 
-    typeButtons.forEach(button => {
+    buttons.forEach(button => {
 
-        const type = button.dataset.type;
+        const type =
+            button.dataset.type;
+
 
         button.classList.toggle(
             "active",
@@ -338,138 +650,86 @@ function updateProductTypeButtons() {
         );
 
 
-        const price =
+        const priceElement =
             button.querySelector("strong");
 
 
-        if (price) {
+        if (
+            priceElement &&
+            PRICES[type]
+        ) {
 
-            price.textContent =
-                `$${prices[type]}`;
+            priceElement.textContent =
+                `$${PRICES[type]}`;
 
         }
 
     });
 
+}
 
-    if (preorderBtn) {
 
-        preorderBtn.innerHTML = `
+/* =========================================================
+   MODAL — BOTONES DE TIPO
+   ========================================================= */
 
-            <span>
-                PRE-ORDER
-            </span>
+function setupProductTypes() {
 
-            <span>
-                WHATSAPP →
-            </span>
+    document.addEventListener(
+        "click",
+        event => {
 
-        `;
+            const button =
+                event.target.closest(
+                    ".type-button"
+                );
 
-    }
+
+            if (!button) return;
+
+
+            const type =
+                button.dataset.type;
+
+
+            if (!PRICES[type]) return;
+
+
+            currentType = type;
+
+
+            updateProductTypeButtons();
+
+        }
+    );
 
 }
 
 
 /* =========================================================
-   BOTONES PLAYERA / SUDADERA
-========================================================= */
-
-document.addEventListener("click", event => {
-
-    const button =
-        event.target.closest(".type-button");
-
-
-    if (!button) return;
-
-
-    currentType = button.dataset.type;
-
-    updateProductTypeButtons();
-
-});
-
-
-/* =========================================================
-   TALLAS
-========================================================= */
+   MODAL — TALLAS
+   ========================================================= */
 
 function updateSizeButtons() {
 
-    if (!sizes) return;
+    if (!sizesContainer) return;
 
 
-    const sizeButtons =
-        sizes.querySelectorAll("button");
-
-
-    sizeButtons.forEach(button => {
-
-        button.classList.toggle(
-            "active",
-            button.textContent.trim() === currentSize
+    const buttons =
+        sizesContainer.querySelectorAll(
+            "button"
         );
 
-    });
 
-}
+    buttons.forEach(button => {
 
-
-if (sizes) {
-
-    sizes.addEventListener("click", event => {
-
-        const button =
-            event.target.closest("button");
-
-
-        if (!button) return;
-
-
-        currentSize =
+        const size =
             button.textContent.trim();
 
 
-        updateSizeButtons();
-
-    });
-
-}
-
-
-/* =========================================================
-   PRE-ORDER WHATSAPP
-========================================================= */
-
-if (preorderBtn) {
-
-    preorderBtn.addEventListener("click", () => {
-
-        if (!currentProduct) return;
-
-        const price = prices[currentType];
-
-        const typeName =
-            currentType === "playera"
-                ? "Playera"
-                : "Sudadera";
-
-        const message =
-            `Hola SWEETPAIN 👋\n\n` +
-            `Quiero hacer un PRE-ORDER.\n\n` +
-            `Producto: ${currentProduct.name}\n` +
-            `Tipo: ${typeName}\n` +
-            `Talla: ${currentSize}\n` +
-            `Precio: $${price} MXN\n\n` +
-            `Gracias.`;
-
-        const whatsappURL =
-            `https://wa.me/525665897458?text=${encodeURIComponent(message)}`;
-
-        window.open(
-            whatsappURL,
-            "_blank"
+        button.classList.toggle(
+            "active",
+            size === currentSize
         );
 
     });
@@ -477,103 +737,84 @@ if (preorderBtn) {
 }
 
 
-/* =========================================================
-   FILTROS SHOP
-========================================================= */
+function setupSizes() {
 
-const filterButtons =
-    document.querySelectorAll(".filter");
+    if (!sizesContainer) return;
 
 
-filterButtons.forEach(button => {
+    sizesContainer.addEventListener(
+        "click",
+        event => {
 
-    button.addEventListener("click", () => {
-
-        const filter =
-            button.dataset.filter;
-
-
-        currentFilter = filter;
-
-
-        filterButtons.forEach(item => {
-
-            item.classList.remove("active");
-
-        });
+            const button =
+                event.target.closest(
+                    "button"
+                );
 
 
-        button.classList.add("active");
+            if (!button) return;
 
 
-        renderProducts(filter);
-
-    });
-
-});
+            currentSize =
+                button.textContent.trim();
 
 
-/* =========================================================
-   FILTRAR COLECCIÓN
-========================================================= */
-
-function filterCollection(collection) {
-
-    if (collection === "WWE") {
-
-        currentFilter = "all";
-
-        filterButtons.forEach(button => {
-
-            button.classList.remove("active");
-
-        });
-
-
-        const allButton =
-            document.querySelector(
-                '.filter[data-filter="all"]'
-            );
-
-
-        if (allButton) {
-
-            allButton.classList.add("active");
+            updateSizeButtons();
 
         }
-
-
-        renderProducts("all");
-
-
-        const shop =
-            document.getElementById("shop");
-
-
-        if (shop) {
-
-            shop.scrollIntoView({
-                behavior: "smooth"
-            });
-
-        }
-
-    }
+    );
 
 }
 
 
 /* =========================================================
-   COMING SOON
-========================================================= */
+   PRE-ORDER
+   ========================================================= */
 
-function showComingSoon(collection) {
+function setupPreorder() {
 
-    alert(
-        `${collection}\n\n` +
-        `COLLECTION ${collection === "NARUTO" ? "002" : "003"}\n\n` +
-        `PRÓXIMAMENTE.\n\n` +
-        `SWEETPAIN`
+    if (!preorderBtn) return;
+
+
+    preorderBtn.addEventListener(
+        "click",
+        () => {
+
+            if (!currentProduct) return;
+
+
+            const price =
+                PRICES[currentType];
+
+
+            const typeName =
+                currentType === "playera"
+                    ? "PLAYERA"
+                    : "SUDADERA";
+
+
+            const message =
+                `Hola SWEETPAIN 👋\n\n` +
+                `Quiero hacer un PRE-ORDER.\n\n` +
+                `Producto: ${currentProduct.name}\n` +
+                `Colección: ${currentProduct.collection}\n` +
+                `Tipo: ${typeName}\n` +
+                `Talla: ${currentSize}\n` +
+                `Precio: $${price} MXN\n\n` +
+                `Gracias.`;
+
+
+            const url =
+                `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+
+
+            window.open(
+                url,
+                "_blank",
+                "noopener,noreferrer"
+            );
+
+        }
     );
 
 }
@@ -581,126 +822,331 @@ function showComingSoon(collection) {
 
 /* =========================================================
    MENÚ MOBILE
-========================================================= */
+   ========================================================= */
 
-if (menuButton && mobileMenu) {
+function openMobileMenu() {
 
-    menuButton.addEventListener("click", () => {
-
-        mobileMenu.classList.add("open");
-
-        document.body.classList.add("menu-open");
-
-    });
-
-}
+    if (!mobileMenu) return;
 
 
-if (mobileClose && mobileMenu) {
+    mobileMenu.classList.add("open");
 
-    mobileClose.addEventListener("click", () => {
+    document.body.classList.add(
+        "menu-open"
+    );
 
-        mobileMenu.classList.remove("open");
 
-        document.body.classList.remove("menu-open");
-
-    });
+    document.body.style.overflow =
+        "hidden";
 
 }
 
 
-/* =========================================================
-   CERRAR MENÚ AL NAVEGAR
-========================================================= */
+function closeMobileMenu() {
 
-if (mobileMenu) {
-
-    const mobileLinks =
-        mobileMenu.querySelectorAll("a");
+    if (!mobileMenu) return;
 
 
-    mobileLinks.forEach(link => {
+    mobileMenu.classList.remove("open");
 
-        link.addEventListener("click", () => {
-
-            mobileMenu.classList.remove("open");
-
-            document.body.classList.remove("menu-open");
-
-        });
-
-    });
-
-}
+    document.body.classList.remove(
+        "menu-open"
+    );
 
 
-/* =========================================================
-   ESC — CERRAR MODAL / MENÚ
-========================================================= */
+    /*
+       Solo restauramos overflow si
+       no hay un modal abierto.
+    */
 
-document.addEventListener("keydown", event => {
+    if (
+        !productModal ||
+        !productModal.classList.contains("open")
+    ) {
 
-    if (event.key === "Escape") {
-
-        closeProduct();
-
-
-        if (mobileMenu) {
-
-            mobileMenu.classList.remove("open");
-
-        }
-
-
-        document.body.classList.remove("menu-open");
+        document.body.style.overflow =
+            "";
 
     }
 
-});
+}
+
+
+function setupMobileMenu() {
+
+    if (menuButton) {
+
+        menuButton.addEventListener(
+            "click",
+            openMobileMenu
+        );
+
+    }
+
+
+    if (mobileClose) {
+
+        mobileClose.addEventListener(
+            "click",
+            closeMobileMenu
+        );
+
+    }
+
+
+    if (mobileMenu) {
+
+        const links =
+            mobileMenu.querySelectorAll(
+                "a"
+            );
+
+
+        links.forEach(link => {
+
+            link.addEventListener(
+                "click",
+                closeMobileMenu
+            );
+
+        });
+
+    }
+
+}
+
+
+/* =========================================================
+   ESC
+   ========================================================= */
+
+function setupKeyboard() {
+
+    document.addEventListener(
+        "keydown",
+        event => {
+
+            if (event.key !== "Escape") {
+                return;
+            }
+
+
+            if (
+                productModal &&
+                productModal.classList.contains("open")
+            ) {
+
+                closeProduct();
+
+                return;
+
+            }
+
+
+            if (
+                mobileMenu &&
+                mobileMenu.classList.contains("open")
+            ) {
+
+                closeMobileMenu();
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   MODAL — BACKDROP
+   ========================================================= */
+
+function setupModal() {
+
+    if (!productModal) return;
+
+
+    const backdrop =
+        productModal.querySelector(
+            ".modal-backdrop"
+        );
+
+
+    if (backdrop) {
+
+        backdrop.addEventListener(
+            "click",
+            closeProduct
+        );
+
+    }
+
+
+    const closeButton =
+        productModal.querySelector(
+            ".modal-close"
+        );
+
+
+    if (closeButton) {
+
+        closeButton.addEventListener(
+            "click",
+            closeProduct
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   TOAST
+   ========================================================= */
+
+let toastTimer = null;
+
+
+function showToast(message) {
+
+    let toast =
+        document.querySelector(".toast");
+
+
+    if (!toast) {
+
+        toast =
+            document.createElement("div");
+
+        toast.className =
+            "toast";
+
+        document.body.appendChild(
+            toast
+        );
+
+    }
+
+
+    toast.textContent =
+        message;
+
+
+    toast.classList.add(
+        "show"
+    );
+
+
+    clearTimeout(toastTimer);
+
+
+    toastTimer =
+        setTimeout(
+            () => {
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            },
+            2800
+        );
+
+}
 
 
 /* =========================================================
    INTRO
-========================================================= */
+   ========================================================= */
 
-window.addEventListener("load", () => {
+function setupIntro() {
 
-    setTimeout(() => {
+    /*
+       Tu CSS ya controla la salida
+       del intro mediante animation.
 
-        if (intro) {
+       Aquí NO eliminamos el elemento.
 
-            intro.classList.add("hidden");
+       Esto es importante:
+       eliminarlo puede provocar comportamientos
+       diferentes al volver a navegar.
+    */
+
+    if (!intro) return;
+
+
+    window.addEventListener(
+        "load",
+        () => {
+
+            setTimeout(
+                () => {
+
+                    intro.classList.add(
+                        "hidden"
+                    );
+
+
+                    if (siteHeader) {
+
+                        siteHeader.classList.add(
+                            "visible"
+                        );
+
+                    }
+
+                },
+                1800
+            );
 
         }
+    );
 
-        if (siteHeader) {
-
-            siteHeader.classList.add("visible");
-
-        }
-
-    }, 1800);
-
-});
+}
 
 
 /* =========================================================
-   REVEAL ANIMATIONS
-========================================================= */
+   REVEAL
+   ========================================================= */
 
-function initializeReveal() {
+function initializeReveal(
+    elements = null
+) {
 
-    const elements =
-        document.querySelectorAll(".reveal");
+    const revealElements =
+        elements ||
+        document.querySelectorAll(
+            ".reveal"
+        );
 
 
-    if (!("IntersectionObserver" in window)) {
+    if (!revealElements.length) {
+        return;
+    }
 
-        elements.forEach(element => {
 
-            element.classList.add("visible");
+    /*
+       Fallback para navegadores sin
+       IntersectionObserver.
+    */
 
-        });
+    if (
+        !(
+            "IntersectionObserver"
+            in window
+        )
+    ) {
+
+        revealElements.forEach(
+            element => {
+
+                element.classList.add(
+                    "visible"
+                );
+
+            }
+        );
 
         return;
 
@@ -711,30 +1157,128 @@ function initializeReveal() {
         new IntersectionObserver(
             entries => {
 
-                entries.forEach(entry => {
+                entries.forEach(
+                    entry => {
 
-                    if (entry.isIntersecting) {
+                        if (
+                            !entry.isIntersecting
+                        ) {
 
-                        entry.target.classList.add("visible");
+                            return;
+
+                        }
+
+
+                        entry.target.classList.add(
+                            "visible"
+                        );
+
 
                         observer.unobserve(
                             entry.target
                         );
 
                     }
-
-                });
+                );
 
             },
             {
-                threshold: 0.12
+                threshold: 0.08,
+                rootMargin: "0px 0px -30px 0px"
             }
         );
 
 
-    elements.forEach(element => {
+    revealElements.forEach(
+        element => {
 
-        observer.observe(element);
+            /*
+               Si ya está visible,
+               no necesitamos observarlo.
+            */
+
+            if (
+                element.classList.contains(
+                    "visible"
+                )
+            ) {
+
+                return;
+
+            }
+
+
+            observer.observe(
+                element
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   NAVEGACIÓN
+   ========================================================= */
+
+function setupNavigation() {
+
+    const links =
+        document.querySelectorAll(
+            'a[href^="#"]'
+        );
+
+
+    links.forEach(link => {
+
+        link.addEventListener(
+            "click",
+            event => {
+
+                const targetId =
+                    link.getAttribute(
+                        "href"
+                    );
+
+
+                if (
+                    !targetId ||
+                    targetId === "#"
+                ) {
+
+                    return;
+
+                }
+
+
+                const target =
+                    document.querySelector(
+                        targetId
+                    );
+
+
+                if (!target) return;
+
+
+                event.preventDefault();
+
+
+                target.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+
+                /*
+                   Cerramos menú mobile
+                   si estaba abierto.
+                */
+
+                closeMobileMenu();
+
+            }
+        );
 
     });
 
@@ -742,26 +1286,211 @@ function initializeReveal() {
 
 
 /* =========================================================
-   INICIO
-========================================================= */
+   HEADER — SCROLL
+   ========================================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
+function setupHeader() {
 
-    renderProducts("all");
+    if (!siteHeader) return;
 
-    initializeReveal();
 
-});
+    const updateHeader =
+        () => {
+
+            if (
+                window.scrollY > 30
+            ) {
+
+                siteHeader.style.background =
+                    "rgba(5,5,5,.88)";
+
+                siteHeader.style.backdropFilter =
+                    "blur(10px)";
+
+            } else {
+
+                siteHeader.style.background =
+                    "";
+
+                siteHeader.style.backdropFilter =
+                    "";
+
+            }
+
+        };
+
+
+    window.addEventListener(
+        "scroll",
+        updateHeader,
+        {
+            passive: true
+        }
+    );
+
+
+    updateHeader();
+
+}
 
 
 /* =========================================================
-   EXPORTS GLOBALES
-========================================================= */
+   IMÁGENES — FALLBACK
+   ========================================================= */
 
-window.openProduct = openProduct;
+function setupImageProtection() {
 
-window.closeProduct = closeProduct;
+    document.addEventListener(
+        "error",
+        event => {
 
-window.filterCollection = filterCollection;
+            const image =
+                event.target;
 
-window.showComingSoon = showComingSoon; 
+
+            if (
+                image &&
+                image.tagName === "IMG"
+            ) {
+
+                /*
+                   No hacemos nada destructivo.
+
+                   La imagen simplemente conserva
+                   su contenedor.
+                */
+
+                image.classList.add(
+                    "image-error"
+                );
+
+            }
+
+        },
+        true
+    );
+
+}
+
+
+/* =========================================================
+   INIT
+   ========================================================= */
+
+function initSweetPain() {
+
+    /*
+       SHOP
+    */
+
+    renderProducts("all");
+
+    setupFilters();
+
+
+    /*
+       MODAL
+    */
+
+    setupModal();
+
+    setupProductTypes();
+
+    setupSizes();
+
+    setupPreorder();
+
+
+    /*
+       MOBILE
+    */
+
+    setupMobileMenu();
+
+
+    /*
+       KEYBOARD
+    */
+
+    setupKeyboard();
+
+
+    /*
+       NAVEGACIÓN
+    */
+
+    setupNavigation();
+
+
+    /*
+       HEADER
+    */
+
+    setupHeader();
+
+
+    /*
+       INTRO
+    */
+
+    setupIntro();
+
+
+    /*
+       IMÁGENES
+    */
+
+    setupImageProtection();
+
+
+    /*
+       REVEALS
+    */
+
+    initializeReveal();
+
+
+    /*
+       Estado inicial de filtros
+    */
+
+    updateFilterButtons("all");
+
+}
+
+
+/* =========================================================
+   DOM READY
+   ========================================================= */
+
+if (
+    document.readyState === "loading"
+) {
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        initSweetPain
+    );
+
+} else {
+
+    initSweetPain();
+
+}
+
+
+/* =========================================================
+   EXPORTS
+   ========================================================= */
+
+window.openProduct =
+    openProduct;
+
+window.closeProduct =
+    closeProduct;
+
+window.filterCollection =
+    filterCollection;
+
+window.showComingSoon =
+    showComingSoon; 
