@@ -1,6 +1,6 @@
 /* =========================================================
    SWEETPAIN — APP.JS
-   ========================================================= */
+========================================================= */
 
 
 /* =========================================================
@@ -9,9 +9,9 @@
 
 const products = [
 
-    /* =====================================================
-       COLLECTION 001 — WWE
-    ===================================================== */
+    /* =========================
+       WWE
+    ========================= */
 
     {
         id: "undertaker",
@@ -104,9 +104,9 @@ const products = [
     },
 
 
-    /* =====================================================
-       COLLECTION 002 — NARUTO
-    ===================================================== */
+    /* =========================
+       NARUTO
+    ========================= */
 
     {
         id: "akatsuki",
@@ -114,7 +114,7 @@ const products = [
         image: "assets/akatsuki.png",
         collection: "COLLECTION 002 / NARUTO",
         collectionId: "NARUTO",
-        description: "Una pieza inspirada en una de las organizaciones más icónicas del universo Naruto.",
+        description: "Una pieza inspirada en una de las organizaciones más icónicas del universo shinobi.",
         type: "playera"
     },
 
@@ -134,7 +134,7 @@ const products = [
         image: "assets/obito.png",
         collection: "COLLECTION 002 / NARUTO",
         collectionId: "NARUTO",
-        description: "Una identidad marcada por la máscara, el conflicto y la transformación.",
+        description: "Una identidad construida entre máscaras, poder y legado.",
         type: "playera"
     },
 
@@ -144,7 +144,7 @@ const products = [
         image: "assets/itachi.png",
         collection: "COLLECTION 002 / NARUTO",
         collectionId: "NARUTO",
-        description: "Silencio. Sacrificio. Legado.",
+        description: "Silencio. Genjutsu. Legado.",
         type: "playera"
     },
 
@@ -154,7 +154,7 @@ const products = [
         image: "assets/sasori.png",
         collection: "COLLECTION 002 / NARUTO",
         collectionId: "NARUTO",
-        description: "Arte, control y una obsesión por convertir lo efímero en eterno.",
+        description: "Arte, control y una presencia imposible de olvidar.",
         type: "playera"
     },
 
@@ -164,7 +164,7 @@ const products = [
         image: "assets/kisame.png",
         collection: "COLLECTION 002 / NARUTO",
         collectionId: "NARUTO",
-        description: "Una presencia brutal nacida de las profundidades.",
+        description: "Una pieza inspirada en uno de los shinobi más imponentes.",
         type: "playera"
     },
 
@@ -174,7 +174,7 @@ const products = [
         image: "assets/hidan.png",
         collection: "COLLECTION 002 / NARUTO",
         collectionId: "NARUTO",
-        description: "Caos, ritual y una presencia imposible de ignorar.",
+        description: "Ritual. Caos. Inmortalidad.",
         type: "playera"
     },
 
@@ -184,7 +184,7 @@ const products = [
         image: "assets/deidara.png",
         collection: "COLLECTION 002 / NARUTO",
         collectionId: "NARUTO",
-        description: "El arte convertido en explosión.",
+        description: "El arte es explosión.",
         type: "playera"
     },
 
@@ -194,7 +194,7 @@ const products = [
         image: "assets/kakuzu.png",
         collection: "COLLECTION 002 / NARUTO",
         collectionId: "NARUTO",
-        description: "Ambición, poder y una obsesión por sobrevivir.",
+        description: "Poder, ambición y una existencia marcada por el dinero.",
         type: "playera"
     }
 
@@ -206,29 +206,17 @@ const products = [
 ========================================================= */
 
 const productGrid = document.getElementById("productGrid");
-
 const productModal = document.getElementById("productModal");
-
 const modalImage = document.getElementById("modalImage");
-
 const modalCollection = document.getElementById("modalCollection");
-
 const modalName = document.getElementById("modalName");
-
 const modalDescription = document.getElementById("modalDescription");
-
 const preorderBtn = document.getElementById("preorderBtn");
-
 const sizes = document.getElementById("sizes");
-
 const menuButton = document.getElementById("menuButton");
-
 const mobileMenu = document.getElementById("mobileMenu");
-
 const mobileClose = document.getElementById("mobileClose");
-
 const intro = document.getElementById("intro");
-
 const siteHeader = document.getElementById("siteHeader");
 
 
@@ -237,11 +225,8 @@ const siteHeader = document.getElementById("siteHeader");
 ========================================================= */
 
 const prices = {
-
     playera: 280,
-
     sudadera: 450
-
 };
 
 
@@ -250,13 +235,8 @@ const prices = {
 ========================================================= */
 
 let currentProduct = null;
-
 let currentType = "playera";
-
 let currentFilter = "all";
-
-let currentCollection = "all";
-
 let currentSize = "M";
 
 
@@ -264,24 +244,23 @@ let currentSize = "M";
    RENDER PRODUCTOS
 ========================================================= */
 
-function renderProducts(
-    filter = "all",
-    collection = currentCollection
-) {
+function renderProducts(filter = "all") {
 
     if (!productGrid) return;
 
     productGrid.innerHTML = "";
-
 
     let filteredProducts = products;
 
 
     /* FILTRO POR TIPO */
 
-    if (filter !== "all") {
+    if (
+        filter === "playera" ||
+        filter === "sudadera"
+    ) {
 
-        filteredProducts = filteredProducts.filter(
+        filteredProducts = products.filter(
             product => product.type === filter
         );
 
@@ -290,10 +269,13 @@ function renderProducts(
 
     /* FILTRO POR COLECCIÓN */
 
-    if (collection !== "all") {
+    else if (
+        filter === "WWE" ||
+        filter === "NARUTO"
+    ) {
 
-        filteredProducts = filteredProducts.filter(
-            product => product.collectionId === collection
+        filteredProducts = products.filter(
+            product => product.collectionId === filter
         );
 
     }
@@ -306,17 +288,11 @@ function renderProducts(
         const card =
             document.createElement("article");
 
-
         card.className =
             "product-card reveal";
 
-
         card.dataset.type =
             product.type;
-
-
-        card.dataset.collection =
-            product.collectionId;
 
 
         card.innerHTML = `
@@ -360,7 +336,7 @@ function renderProducts(
                         </span>
 
                         <strong>
-                            $280
+                            $${prices.playera}
                         </strong>
 
                     </div>
@@ -379,9 +355,6 @@ function renderProducts(
 
     updateShopCount(filteredProducts.length);
 
-
-    /* ACTIVAR REVEAL DE NUEVAS TARJETAS */
-
     initializeReveal();
 
 }
@@ -396,9 +369,7 @@ function updateShopCount(count) {
     const counter =
         document.querySelector(".shop-count");
 
-
     if (!counter) return;
-
 
     counter.textContent =
         String(count).padStart(2, "0") +
@@ -418,7 +389,6 @@ function openProduct(productId) {
             item => item.id === productId
         );
 
-
     if (!product || !productModal) return;
 
 
@@ -429,39 +399,20 @@ function openProduct(productId) {
     currentSize = "M";
 
 
-    if (modalImage) {
+    modalImage.src =
+        product.image;
 
-        modalImage.src =
-            product.image;
+    modalImage.alt =
+        product.name;
 
-        modalImage.alt =
-            product.name;
+    modalCollection.textContent =
+        product.collection;
 
-    }
+    modalName.textContent =
+        product.name;
 
-
-    if (modalCollection) {
-
-        modalCollection.textContent =
-            product.collection;
-
-    }
-
-
-    if (modalName) {
-
-        modalName.textContent =
-            product.name;
-
-    }
-
-
-    if (modalDescription) {
-
-        modalDescription.textContent =
-            product.description;
-
-    }
+    modalDescription.textContent =
+        product.description;
 
 
     updateProductTypeButtons();
@@ -484,7 +435,6 @@ function closeProduct() {
 
     if (!productModal) return;
 
-
     productModal.classList.remove("open");
 
     document.body.classList.remove("modal-open");
@@ -499,7 +449,9 @@ function closeProduct() {
 function updateProductTypeButtons() {
 
     const typeButtons =
-        document.querySelectorAll(".type-button");
+        document.querySelectorAll(
+            ".type-button"
+        );
 
 
     typeButtons.forEach(button => {
@@ -584,7 +536,9 @@ function updateSizeButtons() {
 
 
     const sizeButtons =
-        sizes.querySelectorAll("button");
+        sizes.querySelectorAll(
+            "button"
+        );
 
 
     sizeButtons.forEach(button => {
@@ -681,7 +635,9 @@ if (preorderBtn) {
 ========================================================= */
 
 const filterButtons =
-    document.querySelectorAll(".filter");
+    document.querySelectorAll(
+        ".filter"
+    );
 
 
 filterButtons.forEach(button => {
@@ -698,13 +654,15 @@ filterButtons.forEach(button => {
                 filter;
 
 
-            filterButtons.forEach(item => {
+            filterButtons.forEach(
+                item => {
 
-                item.classList.remove(
-                    "active"
-                );
+                    item.classList.remove(
+                        "active"
+                    );
 
-            });
+                }
+            );
 
 
             button.classList.add(
@@ -712,10 +670,7 @@ filterButtons.forEach(button => {
             );
 
 
-            renderProducts(
-                currentFilter,
-                currentCollection
-            );
+            renderProducts(filter);
 
         }
     );
@@ -729,94 +684,48 @@ filterButtons.forEach(button => {
 
 function filterCollection(collection) {
 
-    /* ===============================
-       WWE
-    =============================== */
+    if (
+        collection === "WWE" ||
+        collection === "NARUTO"
+    ) {
 
-    if (collection === "WWE") {
-
-        currentCollection = "WWE";
-
-    }
+        currentFilter =
+            collection;
 
 
-    /* ===============================
-       NARUTO
-    =============================== */
+        filterButtons.forEach(
+            button => {
 
-    else if (collection === "NARUTO") {
+                button.classList.remove(
+                    "active"
+                );
 
-        currentCollection = "NARUTO";
-
-    }
-
-
-    else {
-
-        currentCollection = "all";
-
-    }
-
-
-    /* ===============================
-       RESET FILTRO DE TIPO
-    =============================== */
-
-    currentFilter = "all";
-
-
-    filterButtons.forEach(button => {
-
-        button.classList.remove(
-            "active"
-        );
-
-    });
-
-
-    const allButton =
-        document.querySelector(
-            '.filter[data-filter="all"]'
+            }
         );
 
 
-    if (allButton) {
-
-        allButton.classList.add(
-            "active"
-        );
-
-    }
+        /*
+         * Quitamos el filtro visual de TODO
+         * porque ahora estamos viendo una colección.
+         */
 
 
-    /* ===============================
-       RENDER
-    =============================== */
-
-    renderProducts(
-        "all",
-        currentCollection
-    );
+        renderProducts(collection);
 
 
-    /* ===============================
-       SCROLL AL SHOP
-    =============================== */
-
-    const shop =
-        document.getElementById("shop");
+        const shop =
+            document.getElementById(
+                "shop"
+            );
 
 
-    if (shop) {
-
-        setTimeout(() => {
+        if (shop) {
 
             shop.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
+                behavior: "smooth"
             });
 
-        }, 100);
+        }
 
     }
 
@@ -831,6 +740,11 @@ function showComingSoon(collection) {
 
     alert(
         `${collection}\n\n` +
+        `COLLECTION ${
+            collection === "NARUTO"
+                ? "002"
+                : "003"
+        }\n\n` +
         `PRÓXIMAMENTE.\n\n` +
         `SWEETPAIN`
     );
@@ -842,7 +756,10 @@ function showComingSoon(collection) {
    MENÚ MOBILE
 ========================================================= */
 
-if (menuButton && mobileMenu) {
+if (
+    menuButton &&
+    mobileMenu
+) {
 
     menuButton.addEventListener(
         "click",
@@ -862,7 +779,10 @@ if (menuButton && mobileMenu) {
 }
 
 
-if (mobileClose && mobileMenu) {
+if (
+    mobileClose &&
+    mobileMenu
+) {
 
     mobileClose.addEventListener(
         "click",
@@ -889,40 +809,46 @@ if (mobileClose && mobileMenu) {
 if (mobileMenu) {
 
     const mobileLinks =
-        mobileMenu.querySelectorAll("a");
-
-
-    mobileLinks.forEach(link => {
-
-        link.addEventListener(
-            "click",
-            () => {
-
-                mobileMenu.classList.remove(
-                    "open"
-                );
-
-                document.body.classList.remove(
-                    "menu-open"
-                );
-
-            }
+        mobileMenu.querySelectorAll(
+            "a"
         );
 
-    });
+
+    mobileLinks.forEach(
+        link => {
+
+            link.addEventListener(
+                "click",
+                () => {
+
+                    mobileMenu.classList.remove(
+                        "open"
+                    );
+
+                    document.body.classList.remove(
+                        "menu-open"
+                    );
+
+                }
+            );
+
+        }
+    );
 
 }
 
 
 /* =========================================================
-   ESC — CERRAR MODAL / MENÚ
+   ESC
 ========================================================= */
 
 document.addEventListener(
     "keydown",
     event => {
 
-        if (event.key === "Escape") {
+        if (
+            event.key === "Escape"
+        ) {
 
             closeProduct();
 
@@ -990,26 +916,23 @@ function initializeReveal() {
 
     const elements =
         document.querySelectorAll(
-            ".reveal:not(.reveal-ready)"
+            ".reveal:not(.visible)"
         );
 
 
-    if (!elements.length) return;
+    if (
+        !("IntersectionObserver" in window)
+    ) {
 
+        elements.forEach(
+            element => {
 
-    if (!("IntersectionObserver" in window)) {
+                element.classList.add(
+                    "visible"
+                );
 
-        elements.forEach(element => {
-
-            element.classList.add(
-                "visible"
-            );
-
-            element.classList.add(
-                "reveal-ready"
-            );
-
-        });
+            }
+        );
 
         return;
 
@@ -1031,9 +954,6 @@ function initializeReveal() {
                                 "visible"
                             );
 
-                            entry.target.classList.add(
-                                "reveal-ready"
-                            );
 
                             observer.unobserve(
                                 entry.target
@@ -1051,11 +971,15 @@ function initializeReveal() {
         );
 
 
-    elements.forEach(element => {
+    elements.forEach(
+        element => {
 
-        observer.observe(element);
+            observer.observe(
+                element
+            );
 
-    });
+        }
+    );
 
 }
 
@@ -1068,16 +992,7 @@ document.addEventListener(
     "DOMContentLoaded",
     () => {
 
-        currentCollection = "all";
-
-        currentFilter = "all";
-
-
-        renderProducts(
-            "all",
-            "all"
-        );
-
+        renderProducts("all");
 
         initializeReveal();
 
