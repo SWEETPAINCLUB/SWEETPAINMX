@@ -3631,3 +3631,27 @@ body::before {
     }
 
 }
+
+/* =========================================================
+   PRODUCT PRICES — VISIBILIDAD
+========================================================= */
+
+.product-price {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.product-price span {
+    color: #b8b3a7;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+}
+
+.product-price strong {
+    color: #c9a45c;
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+}
