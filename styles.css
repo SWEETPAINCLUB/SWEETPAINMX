@@ -3655,3 +3655,36 @@ body::before {
     font-weight: 800;
     letter-spacing: 0.03em;
 }
+/* =========================================================
+   PRODUCT CARDS — SWEETPAIN DARK PREMIUM
+========================================================= */
+
+.product-card {
+    background: #0B0B0A;
+    border: 1px solid rgba(201, 162, 39, 0.28);
+}
+
+.product-info {
+    background: #0B0B0A;
+    border-top: 1px solid rgba(201, 162, 39, 0.18);
+}
+
+.product-collection {
+    color: #77736A !important;
+}
+
+.product-info h3 {
+    color: #D8D1C3 !important;
+}
+
+.product-price {
+    color: #77736A;
+}
+
+.product-price span {
+    color: #77736A !important;
+}
+
+.product-price strong {
+    color: #C9A227 !important;
+}
