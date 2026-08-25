@@ -114,7 +114,7 @@ const products = [
         image: "assets/akatsuki.png",
         collection: "COLLECTION 002 / NARUTO",
         collectionId: "NARUTO",
-        description: "Una pieza inspirada en una de las organizaciones más icónicas del universo shinobi.",
+        description: "Una organización. Nueve sombras. Una identidad.",
         type: "playera"
     },
 
@@ -124,7 +124,7 @@ const products = [
         image: "assets/pain.png",
         collection: "COLLECTION 002 / NARUTO",
         collectionId: "NARUTO",
-        description: "Dolor. Poder. Presencia.",
+        description: "Dolor, presencia y una visión capaz de cambiar el mundo.",
         type: "playera"
     },
 
@@ -134,7 +134,7 @@ const products = [
         image: "assets/obito.png",
         collection: "COLLECTION 002 / NARUTO",
         collectionId: "NARUTO",
-        description: "Una identidad construida entre máscaras, poder y legado.",
+        description: "Una máscara. Una identidad. Una historia marcada por la guerra.",
         type: "playera"
     },
 
@@ -144,7 +144,7 @@ const products = [
         image: "assets/itachi.png",
         collection: "COLLECTION 002 / NARUTO",
         collectionId: "NARUTO",
-        description: "Silencio. Genjutsu. Legado.",
+        description: "Silencio, sacrificio y un legado imposible de olvidar.",
         type: "playera"
     },
 
@@ -154,7 +154,7 @@ const products = [
         image: "assets/sasori.png",
         collection: "COLLECTION 002 / NARUTO",
         collectionId: "NARUTO",
-        description: "Arte, control y una presencia imposible de olvidar.",
+        description: "Arte, control y una obsesión por convertirlo todo en eterno.",
         type: "playera"
     },
 
@@ -164,7 +164,7 @@ const products = [
         image: "assets/kisame.png",
         collection: "COLLECTION 002 / NARUTO",
         collectionId: "NARUTO",
-        description: "Una pieza inspirada en uno de los shinobi más imponentes.",
+        description: "La bestia de la niebla. Brutalidad sin límites.",
         type: "playera"
     },
 
@@ -174,7 +174,7 @@ const products = [
         image: "assets/hidan.png",
         collection: "COLLECTION 002 / NARUTO",
         collectionId: "NARUTO",
-        description: "Ritual. Caos. Inmortalidad.",
+        description: "Ritual, caos y una presencia imposible de ignorar.",
         type: "playera"
     },
 
@@ -184,7 +184,7 @@ const products = [
         image: "assets/deidara.png",
         collection: "COLLECTION 002 / NARUTO",
         collectionId: "NARUTO",
-        description: "El arte es explosión.",
+        description: "El arte es explosión. Una pieza nacida del caos.",
         type: "playera"
     },
 
@@ -194,7 +194,7 @@ const products = [
         image: "assets/kakuzu.png",
         collection: "COLLECTION 002 / NARUTO",
         collectionId: "NARUTO",
-        description: "Poder, ambición y una existencia marcada por el dinero.",
+        description: "Ambición, poder y una vida construida alrededor del valor.",
         type: "playera"
     }
 
@@ -207,15 +207,19 @@ const products = [
 
 const productGrid = document.getElementById("productGrid");
 const productModal = document.getElementById("productModal");
+
 const modalImage = document.getElementById("modalImage");
 const modalCollection = document.getElementById("modalCollection");
 const modalName = document.getElementById("modalName");
 const modalDescription = document.getElementById("modalDescription");
+
 const preorderBtn = document.getElementById("preorderBtn");
 const sizes = document.getElementById("sizes");
+
 const menuButton = document.getElementById("menuButton");
 const mobileMenu = document.getElementById("mobileMenu");
 const mobileClose = document.getElementById("mobileClose");
+
 const intro = document.getElementById("intro");
 const siteHeader = document.getElementById("siteHeader");
 
@@ -237,6 +241,7 @@ const prices = {
 let currentProduct = null;
 let currentType = "playera";
 let currentFilter = "all";
+let currentCollection = "all";
 let currentSize = "M";
 
 
@@ -244,55 +249,35 @@ let currentSize = "M";
    RENDER PRODUCTOS
 ========================================================= */
 
-function renderProducts(filter = "all") {
+function renderProducts() {
 
     if (!productGrid) return;
 
     productGrid.innerHTML = "";
 
-    let filteredProducts = products;
 
+    let filteredProducts = products.filter(product => {
 
-    /* FILTRO POR TIPO */
+        const matchesCollection =
+            currentCollection === "all" ||
+            product.collectionId === currentCollection;
 
-    if (
-        filter === "playera" ||
-        filter === "sudadera"
-    ) {
+        const matchesType =
+            currentFilter === "all" ||
+            product.type === currentFilter;
 
-        filteredProducts = products.filter(
-            product => product.type === filter
-        );
+        return matchesCollection && matchesType;
 
-    }
+    });
 
-
-    /* FILTRO POR COLECCIÓN */
-
-    else if (
-        filter === "WWE" ||
-        filter === "NARUTO"
-    ) {
-
-        filteredProducts = products.filter(
-            product => product.collectionId === filter
-        );
-
-    }
-
-
-    /* CREAR TARJETAS */
 
     filteredProducts.forEach((product, index) => {
 
-        const card =
-            document.createElement("article");
+        const card = document.createElement("article");
 
-        card.className =
-            "product-card reveal";
+        card.className = "product-card reveal";
 
-        card.dataset.type =
-            product.type;
+        card.dataset.type = product.type;
 
 
         card.innerHTML = `
@@ -336,7 +321,7 @@ function renderProducts(filter = "all") {
                         </span>
 
                         <strong>
-                            $${prices.playera}
+                            $280
                         </strong>
 
                     </div>
@@ -361,13 +346,12 @@ function renderProducts(filter = "all") {
 
 
 /* =========================================================
-   CONTADOR SHOP
+   CONTADOR
 ========================================================= */
 
 function updateShopCount(count) {
 
-    const counter =
-        document.querySelector(".shop-count");
+    const counter = document.querySelector(".shop-count");
 
     if (!counter) return;
 
@@ -384,10 +368,9 @@ function updateShopCount(count) {
 
 function openProduct(productId) {
 
-    const product =
-        products.find(
-            item => item.id === productId
-        );
+    const product = products.find(
+        item => item.id === productId
+    );
 
     if (!product || !productModal) return;
 
@@ -395,15 +378,11 @@ function openProduct(productId) {
     currentProduct = product;
 
     currentType = "playera";
-
     currentSize = "M";
 
 
-    modalImage.src =
-        product.image;
-
-    modalImage.alt =
-        product.name;
+    modalImage.src = product.image;
+    modalImage.alt = product.name;
 
     modalCollection.textContent =
         product.collection;
@@ -416,7 +395,6 @@ function openProduct(productId) {
 
 
     updateProductTypeButtons();
-
     updateSizeButtons();
 
 
@@ -449,15 +427,12 @@ function closeProduct() {
 function updateProductTypeButtons() {
 
     const typeButtons =
-        document.querySelectorAll(
-            ".type-button"
-        );
+        document.querySelectorAll(".type-button");
 
 
     typeButtons.forEach(button => {
 
-        const type =
-            button.dataset.type;
+        const type = button.dataset.type;
 
 
         button.classList.toggle(
@@ -500,30 +475,25 @@ function updateProductTypeButtons() {
 
 
 /* =========================================================
-   BOTONES PLAYERA / SUDADERA
+   PLAYERA / SUDADERA
 ========================================================= */
 
-document.addEventListener(
-    "click",
-    event => {
+document.addEventListener("click", event => {
 
-        const button =
-            event.target.closest(
-                ".type-button"
-            );
+    const button =
+        event.target.closest(".type-button");
 
 
-        if (!button) return;
+    if (!button) return;
 
 
-        currentType =
-            button.dataset.type;
+    currentType =
+        button.dataset.type;
 
 
-        updateProductTypeButtons();
+    updateProductTypeButtons();
 
-    }
-);
+});
 
 
 /* =========================================================
@@ -536,17 +506,14 @@ function updateSizeButtons() {
 
 
     const sizeButtons =
-        sizes.querySelectorAll(
-            "button"
-        );
+        sizes.querySelectorAll("button");
 
 
     sizeButtons.forEach(button => {
 
         button.classList.toggle(
             "active",
-            button.textContent.trim() ===
-            currentSize
+            button.textContent.trim() === currentSize
         );
 
     });
@@ -556,27 +523,22 @@ function updateSizeButtons() {
 
 if (sizes) {
 
-    sizes.addEventListener(
-        "click",
-        event => {
+    sizes.addEventListener("click", event => {
 
-            const button =
-                event.target.closest(
-                    "button"
-                );
+        const button =
+            event.target.closest("button");
 
 
-            if (!button) return;
+        if (!button) return;
 
 
-            currentSize =
-                button.textContent.trim();
+        currentSize =
+            button.textContent.trim();
 
 
-            updateSizeButtons();
+        updateSizeButtons();
 
-        }
-    );
+    });
 
 }
 
@@ -587,45 +549,42 @@ if (sizes) {
 
 if (preorderBtn) {
 
-    preorderBtn.addEventListener(
-        "click",
-        () => {
+    preorderBtn.addEventListener("click", () => {
 
-            if (!currentProduct) return;
+        if (!currentProduct) return;
 
 
-            const price =
-                prices[currentType];
+        const price =
+            prices[currentType];
 
 
-            const typeName =
-                currentType === "playera"
-                    ? "Playera"
-                    : "Sudadera";
+        const typeName =
+            currentType === "playera"
+                ? "Playera"
+                : "Sudadera";
 
 
-            const message =
-                `Hola SWEETPAIN 👋\n\n` +
-                `Quiero hacer un PRE-ORDER.\n\n` +
-                `Producto: ${currentProduct.name}\n` +
-                `Colección: ${currentProduct.collection}\n` +
-                `Tipo: ${typeName}\n` +
-                `Talla: ${currentSize}\n` +
-                `Precio: $${price} MXN\n\n` +
-                `Gracias.`;
+        const message =
+            `Hola SWEETPAIN 👋\n\n` +
+            `Quiero hacer un PRE-ORDER.\n\n` +
+            `Producto: ${currentProduct.name}\n` +
+            `Colección: ${currentProduct.collection}\n` +
+            `Tipo: ${typeName}\n` +
+            `Talla: ${currentSize}\n` +
+            `Precio: $${price} MXN\n\n` +
+            `Gracias.`;
 
 
-            const whatsappURL =
-                `https://wa.me/525665897458?text=${encodeURIComponent(message)}`;
+        const whatsappURL =
+            `https://wa.me/525665897458?text=${encodeURIComponent(message)}`;
 
 
-            window.open(
-                whatsappURL,
-                "_blank"
-            );
+        window.open(
+            whatsappURL,
+            "_blank"
+        );
 
-        }
-    );
+    });
 
 }
 
@@ -635,45 +594,30 @@ if (preorderBtn) {
 ========================================================= */
 
 const filterButtons =
-    document.querySelectorAll(
-        ".filter"
-    );
+    document.querySelectorAll(".filter");
 
 
 filterButtons.forEach(button => {
 
-    button.addEventListener(
-        "click",
-        () => {
+    button.addEventListener("click", () => {
 
-            const filter =
-                button.dataset.filter;
+        currentFilter =
+            button.dataset.filter;
 
 
-            currentFilter =
-                filter;
+        filterButtons.forEach(item => {
+
+            item.classList.remove("active");
+
+        });
 
 
-            filterButtons.forEach(
-                item => {
-
-                    item.classList.remove(
-                        "active"
-                    );
-
-                }
-            );
+        button.classList.add("active");
 
 
-            button.classList.add(
-                "active"
-            );
+        renderProducts();
 
-
-            renderProducts(filter);
-
-        }
-    );
+    });
 
 });
 
@@ -685,47 +629,54 @@ filterButtons.forEach(button => {
 function filterCollection(collection) {
 
     if (
-        collection === "WWE" ||
-        collection === "NARUTO"
+        collection !== "WWE" &&
+        collection !== "NARUTO"
     ) {
 
-        currentFilter =
-            collection;
+        showComingSoon(collection);
+
+        return;
+
+    }
 
 
-        filterButtons.forEach(
-            button => {
+    currentCollection = collection;
 
-                button.classList.remove(
-                    "active"
-                );
+    currentFilter = "all";
 
-            }
+
+    filterButtons.forEach(button => {
+
+        button.classList.remove("active");
+
+    });
+
+
+    const allButton =
+        document.querySelector(
+            '.filter[data-filter="all"]'
         );
 
 
-        /*
-         * Quitamos el filtro visual de TODO
-         * porque ahora estamos viendo una colección.
-         */
+    if (allButton) {
+
+        allButton.classList.add("active");
+
+    }
 
 
-        renderProducts(collection);
+    renderProducts();
 
 
-        const shop =
-            document.getElementById(
-                "shop"
-            );
+    const shop =
+        document.getElementById("shop");
 
 
-        if (shop) {
+    if (shop) {
 
-            shop.scrollIntoView({
-                behavior: "smooth"
-            });
-
-        }
+        shop.scrollIntoView({
+            behavior: "smooth"
+        });
 
     }
 
@@ -738,13 +689,24 @@ function filterCollection(collection) {
 
 function showComingSoon(collection) {
 
+    /*
+       NARUTO YA ESTÁ DISPONIBLE.
+       Esto permite que el HTML actual,
+       que todavía llama showComingSoon('NARUTO'),
+       funcione sin modificarlo.
+    */
+
+    if (collection === "NARUTO") {
+
+        filterCollection("NARUTO");
+
+        return;
+
+    }
+
+
     alert(
         `${collection}\n\n` +
-        `COLLECTION ${
-            collection === "NARUTO"
-                ? "002"
-                : "003"
-        }\n\n` +
         `PRÓXIMAMENTE.\n\n` +
         `SWEETPAIN`
     );
@@ -756,48 +718,28 @@ function showComingSoon(collection) {
    MENÚ MOBILE
 ========================================================= */
 
-if (
-    menuButton &&
-    mobileMenu
-) {
+if (menuButton && mobileMenu) {
 
-    menuButton.addEventListener(
-        "click",
-        () => {
+    menuButton.addEventListener("click", () => {
 
-            mobileMenu.classList.add(
-                "open"
-            );
+        mobileMenu.classList.add("open");
 
-            document.body.classList.add(
-                "menu-open"
-            );
+        document.body.classList.add("menu-open");
 
-        }
-    );
+    });
 
 }
 
 
-if (
-    mobileClose &&
-    mobileMenu
-) {
+if (mobileClose && mobileMenu) {
 
-    mobileClose.addEventListener(
-        "click",
-        () => {
+    mobileClose.addEventListener("click", () => {
 
-            mobileMenu.classList.remove(
-                "open"
-            );
+        mobileMenu.classList.remove("open");
 
-            document.body.classList.remove(
-                "menu-open"
-            );
+        document.body.classList.remove("menu-open");
 
-        }
-    );
+    });
 
 }
 
@@ -809,31 +751,20 @@ if (
 if (mobileMenu) {
 
     const mobileLinks =
-        mobileMenu.querySelectorAll(
-            "a"
-        );
+        mobileMenu.querySelectorAll("a");
 
 
-    mobileLinks.forEach(
-        link => {
+    mobileLinks.forEach(link => {
 
-            link.addEventListener(
-                "click",
-                () => {
+        link.addEventListener("click", () => {
 
-                    mobileMenu.classList.remove(
-                        "open"
-                    );
+            mobileMenu.classList.remove("open");
 
-                    document.body.classList.remove(
-                        "menu-open"
-                    );
+            document.body.classList.remove("menu-open");
 
-                }
-            );
+        });
 
-        }
-    );
+    });
 
 }
 
@@ -842,70 +773,51 @@ if (mobileMenu) {
    ESC
 ========================================================= */
 
-document.addEventListener(
-    "keydown",
-    event => {
+document.addEventListener("keydown", event => {
 
-        if (
-            event.key === "Escape"
-        ) {
+    if (event.key === "Escape") {
 
-            closeProduct();
+        closeProduct();
 
 
-            if (mobileMenu) {
+        if (mobileMenu) {
 
-                mobileMenu.classList.remove(
-                    "open"
-                );
-
-            }
-
-
-            document.body.classList.remove(
-                "menu-open"
-            );
+            mobileMenu.classList.remove("open");
 
         }
 
+
+        document.body.classList.remove("menu-open");
+
     }
-);
+
+});
 
 
 /* =========================================================
    INTRO
 ========================================================= */
 
-window.addEventListener(
-    "load",
-    () => {
+window.addEventListener("load", () => {
 
-        setTimeout(
-            () => {
+    setTimeout(() => {
 
-                if (intro) {
+        if (intro) {
 
-                    intro.classList.add(
-                        "hidden"
-                    );
+            intro.classList.add("hidden");
 
-                }
+        }
 
 
-                if (siteHeader) {
+        if (siteHeader) {
 
-                    siteHeader.classList.add(
-                        "visible"
-                    );
+            siteHeader.classList.add("visible");
 
-                }
+        }
 
-            },
-            1800
-        );
+    }, 1800);
 
-    }
-);
+});
 
 
 /* =========================================================
@@ -920,19 +832,13 @@ function initializeReveal() {
         );
 
 
-    if (
-        !("IntersectionObserver" in window)
-    ) {
+    if (!("IntersectionObserver" in window)) {
 
-        elements.forEach(
-            element => {
+        elements.forEach(element => {
 
-                element.classList.add(
-                    "visible"
-                );
+            element.classList.add("visible");
 
-            }
-        );
+        });
 
         return;
 
@@ -943,26 +849,19 @@ function initializeReveal() {
         new IntersectionObserver(
             entries => {
 
-                entries.forEach(
-                    entry => {
+                entries.forEach(entry => {
 
-                        if (
-                            entry.isIntersecting
-                        ) {
+                    if (entry.isIntersecting) {
 
-                            entry.target.classList.add(
-                                "visible"
-                            );
+                        entry.target.classList.add("visible");
 
-
-                            observer.unobserve(
-                                entry.target
-                            );
-
-                        }
+                        observer.unobserve(
+                            entry.target
+                        );
 
                     }
-                );
+
+                });
 
             },
             {
@@ -971,15 +870,11 @@ function initializeReveal() {
         );
 
 
-    elements.forEach(
-        element => {
+    elements.forEach(element => {
 
-            observer.observe(
-                element
-            );
+        observer.observe(element);
 
-        }
-    );
+    });
 
 }
 
@@ -992,7 +887,7 @@ document.addEventListener(
     "DOMContentLoaded",
     () => {
 
-        renderProducts("all");
+        renderProducts();
 
         initializeReveal();
 
