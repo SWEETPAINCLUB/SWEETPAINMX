@@ -800,62 +800,150 @@ if (cartContinue) {
 
 
 /* =========================================================
-   CHECKOUT
-   SIN WHATSAPP
+   CHECKOUT — STRIPE
 ========================================================= */
 
 if (cartCheckout) {
 
-    /*
-       Eliminamos cualquier onclick
-       antiguo que pudiera existir
-       en el HTML.
-    */
+    cartCheckout.removeAttribute("onclick");
 
-    cartCheckout.removeAttribute(
-        "onclick"
-    );
+    cartCheckout.addEventListener("click", async event => {
+
+        event.preventDefault();
+
+        if (cart.length === 0) {
+            alert("Tu carrito está vacío.");
+            return;
+        }
+
+        /* ================================================
+           PREPARAR PRODUCTOS PARA STRIPE
+        ================================================= */
+
+        const items = cart.map(item => {
+
+            const type = item.type || "playera";
+
+            const price =
+                item.price ||
+                prices[type] ||
+                prices.playera;
+
+            return {
+                name: item.name,
+                price: price,
+                quantity: item.quantity || 1,
+                size: item.size || "M",
+                type: type
+            };
+
+        });
 
 
-    cartCheckout.addEventListener(
-        "click",
-        event => {
+        /* ================================================
+           DESACTIVAR BOTÓN
+        ================================================= */
 
-            event.preventDefault();
+        const originalHTML =
+            cartCheckout.innerHTML;
+
+        cartCheckout.disabled = true;
+
+        cartCheckout.innerHTML = `
+            <span>
+                PROCESANDO...
+            </span>
+        `;
 
 
-            if (cart.length === 0) {
+        try {
+
+            /* ============================================
+               CONECTAR CON VERCEL / STRIPE
+            ============================================ */
+
+            const response = await fetch(
+                "https://sweetpain-stripe.vercel.app/api/create-checkout-session",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        items: items
+                    })
+                }
+            );
+
+
+            const data =
+                await response.json();
+
+
+            /* ============================================
+               ERROR DEL SERVIDOR
+            ============================================ */
+
+            if (!response.ok) {
+
+                console.error(
+                    "Stripe error:",
+                    data
+                );
+
+                throw new Error(
+                    data.error ||
+                    "No se pudo iniciar el pago."
+                );
+
+            }
+
+
+            /* ============================================
+               REDIRIGIR A STRIPE
+            ============================================ */
+
+            if (data.url) {
+
+                window.location.href =
+                    data.url;
 
                 return;
 
             }
 
 
-            /*
-               STRIPE SE CONECTARÁ AQUÍ.
+            throw new Error(
+                "Stripe no devolvió una URL de pago."
+            );
 
-               NO SE ENVÍA A WHATSAPP.
 
-               NO SE PROCESA EL PAGO
-               DESDE EL FRONTEND.
+        } catch (error) {
 
-               Después conectaremos este
-               botón con nuestro backend
-               de Stripe.
-            */
-
-            console.log(
-                "Carrito listo para Stripe:",
-                cart
+            console.error(
+                "Error al iniciar Stripe:",
+                error
             );
 
 
             alert(
-                "El checkout de Stripe será conectado en el siguiente paso."
+                "No pudimos iniciar el pago. " +
+                "Intenta nuevamente."
             );
 
+
+            cartCheckout.disabled =
+                false;
+
+
+            cartCheckout.innerHTML =
+                originalHTML;
+
         }
-    );
+
+    });
 
 }
 
