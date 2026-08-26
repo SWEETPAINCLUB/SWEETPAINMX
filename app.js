@@ -1,5 +1,7 @@
 /* =========================================================
    SWEETPAIN — APP.JS
+   CART SYSTEM — STRIPE READY
+   WHATSAPP REMOVED
 ========================================================= */
 
 
@@ -9,9 +11,7 @@
 
 const products = [
 
-    /* =====================================================
-       COLLECTION 001 — WWE
-    ===================================================== */
+    /* ================= COLLECTION 001 — WWE ================= */
 
     {
         id: "undertaker",
@@ -104,9 +104,7 @@ const products = [
     },
 
 
-    /* =====================================================
-       COLLECTION 002 — NARUTO
-    ===================================================== */
+    /* ================= COLLECTION 002 — NARUTO ================= */
 
     {
         id: "akatsuki",
@@ -205,42 +203,79 @@ const products = [
    ELEMENTOS
 ========================================================= */
 
-const productGrid = document.getElementById("productGrid");
-const productModal = document.getElementById("productModal");
+const productGrid =
+    document.getElementById("productGrid");
 
-const modalImage = document.getElementById("modalImage");
-const modalCollection = document.getElementById("modalCollection");
-const modalName = document.getElementById("modalName");
-const modalDescription = document.getElementById("modalDescription");
+const productModal =
+    document.getElementById("productModal");
 
-const preorderBtn = document.getElementById("preorderBtn");
-const sizes = document.getElementById("sizes");
+const modalImage =
+    document.getElementById("modalImage");
 
-const menuButton = document.getElementById("menuButton");
-const mobileMenu = document.getElementById("mobileMenu");
-const mobileClose = document.getElementById("mobileClose");
+const modalCollection =
+    document.getElementById("modalCollection");
 
-const intro = document.getElementById("intro");
-const siteHeader = document.getElementById("siteHeader");
+const modalName =
+    document.getElementById("modalName");
+
+const modalDescription =
+    document.getElementById("modalDescription");
+
+const preorderBtn =
+    document.getElementById("preorderBtn");
+
+const sizes =
+    document.getElementById("sizes");
+
+const menuButton =
+    document.getElementById("menuButton");
+
+const mobileMenu =
+    document.getElementById("mobileMenu");
+
+const mobileClose =
+    document.getElementById("mobileClose");
+
+const intro =
+    document.getElementById("intro");
+
+const siteHeader =
+    document.getElementById("siteHeader");
 
 
 /* =========================================================
    CARRITO
 ========================================================= */
 
-const cartButton = document.getElementById("cartButton");
-const cartCount = document.getElementById("cartCount");
+const cartButton =
+    document.getElementById("cartButton");
 
-const cartDrawer = document.getElementById("cartDrawer");
-const cartOverlay = document.getElementById("cartOverlay");
-const cartClose = document.getElementById("cartClose");
+const cartCount =
+    document.getElementById("cartCount");
 
-const cartItems = document.getElementById("cartItems");
-const cartEmpty = document.getElementById("cartEmpty");
-const cartTotal = document.getElementById("cartTotal");
+const cartDrawer =
+    document.getElementById("cartDrawer");
 
-const cartContinue = document.getElementById("cartContinue");
-const cartCheckout = document.getElementById("cartCheckout");
+const cartOverlay =
+    document.getElementById("cartOverlay");
+
+const cartClose =
+    document.getElementById("cartClose");
+
+const cartItems =
+    document.getElementById("cartItems");
+
+const cartEmpty =
+    document.getElementById("cartEmpty");
+
+const cartTotal =
+    document.getElementById("cartTotal");
+
+const cartContinue =
+    document.getElementById("cartContinue");
+
+const cartCheckout =
+    document.getElementById("cartCheckout");
 
 
 /* =========================================================
@@ -248,8 +283,11 @@ const cartCheckout = document.getElementById("cartCheckout");
 ========================================================= */
 
 const prices = {
+
     playera: 280,
+
     sudadera: 450
+
 };
 
 
@@ -271,10 +309,14 @@ let cart = [];
 
 
 /* =========================================================
-   CARRITO — CLAVE
+   CARRITO — KEY
 ========================================================= */
 
-function getCartItemKey(productId, type, size) {
+function getCartItemKey(
+    productId,
+    type,
+    size
+) {
 
     return `${productId}-${type}-${size}`;
 
@@ -292,10 +334,14 @@ function openCart() {
     cartDrawer.classList.add("open");
 
     if (cartOverlay) {
+
         cartOverlay.classList.add("open");
+
     }
 
-    document.body.classList.add("cart-open");
+    document.body.classList.add(
+        "cart-open"
+    );
 
 }
 
@@ -308,13 +354,21 @@ function closeCart() {
 
     if (!cartDrawer) return;
 
-    cartDrawer.classList.remove("open");
+    cartDrawer.classList.remove(
+        "open"
+    );
 
     if (cartOverlay) {
-        cartOverlay.classList.remove("open");
+
+        cartOverlay.classList.remove(
+            "open"
+        );
+
     }
 
-    document.body.classList.remove("cart-open");
+    document.body.classList.remove(
+        "cart-open"
+    );
 
 }
 
@@ -352,7 +406,7 @@ function addToCart(
 
         cart.push({
 
-            key,
+            key: key,
 
             productId: product.id,
 
@@ -362,13 +416,13 @@ function addToCart(
 
             collection: product.collection,
 
-            type,
+            type: type,
 
-            size,
+            size: size,
 
             price: prices[type],
 
-            quantity
+            quantity: quantity
 
         });
 
@@ -407,7 +461,8 @@ function changeCartQuantity(
 
         cart =
             cart.filter(
-                product => product.key !== key
+                product =>
+                    product.key !== key
             );
 
     }
@@ -436,7 +491,7 @@ function removeFromCart(key) {
 
 
 /* =========================================================
-   TOTAL DE PRODUCTOS
+   CANTIDAD TOTAL
 ========================================================= */
 
 function getCartItemCount() {
@@ -454,7 +509,7 @@ function getCartItemCount() {
 
 
 /* =========================================================
-   TOTAL DEL CARRITO
+   TOTAL
 ========================================================= */
 
 function getCartTotal() {
@@ -463,7 +518,10 @@ function getCartTotal() {
         (total, item) => {
 
             return total +
-                (item.price * item.quantity);
+                (
+                    item.price *
+                    item.quantity
+                );
 
         },
         0
@@ -487,7 +545,10 @@ function renderCart() {
     if (cart.length === 0) {
 
         if (cartEmpty) {
-            cartEmpty.style.display = "flex";
+
+            cartEmpty.style.display =
+                "flex";
+
         }
 
         return;
@@ -496,14 +557,19 @@ function renderCart() {
 
 
     if (cartEmpty) {
-        cartEmpty.style.display = "none";
+
+        cartEmpty.style.display =
+            "none";
+
     }
 
 
     cart.forEach(item => {
 
         const element =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
 
         element.className =
@@ -543,7 +609,9 @@ function renderCart() {
                 <div class="cart-item-variant">
 
                     ${typeName}
+
                     ·
+
                     TALLA ${item.size}
 
                 </div>
@@ -551,12 +619,13 @@ function renderCart() {
 
                 <div class="cart-item-bottom">
 
+
                     <div class="cart-quantity">
+
 
                         <button
                             type="button"
                             onclick="changeCartQuantity('${item.key}', -1)"
-                            aria-label="Disminuir cantidad"
                         >
                             −
                         </button>
@@ -570,20 +639,27 @@ function renderCart() {
                         <button
                             type="button"
                             onclick="changeCartQuantity('${item.key}', 1)"
-                            aria-label="Aumentar cantidad"
                         >
                             +
                         </button>
+
 
                     </div>
 
 
                     <strong>
+
                         $${(
                             item.price *
                             item.quantity
-                        ).toLocaleString("es-MX")} MXN
+                        ).toLocaleString(
+                            "es-MX"
+                        )}
+
+                        MXN
+
                     </strong>
+
 
                 </div>
 
@@ -596,12 +672,15 @@ function renderCart() {
                     ELIMINAR
                 </button>
 
+
             </div>
 
         `;
 
 
-        cartItems.appendChild(element);
+        cartItems.appendChild(
+            element
+        );
 
     });
 
@@ -636,7 +715,9 @@ function updateCart() {
     if (cartTotal) {
 
         cartTotal.textContent =
-            `$${total.toLocaleString("es-MX")} MXN`;
+            `$${total.toLocaleString(
+                "es-MX"
+            )} MXN`;
 
     }
 
@@ -652,7 +733,7 @@ function updateCart() {
 
 
 /* =========================================================
-   EVENTOS DEL CARRITO
+   BOTÓN CARRITO
 ========================================================= */
 
 if (cartButton) {
@@ -685,6 +766,10 @@ if (cartOverlay) {
 }
 
 
+/* =========================================================
+   CONTINUAR COMPRANDO
+========================================================= */
+
 if (cartContinue) {
 
     cartContinue.addEventListener(
@@ -715,6 +800,703 @@ if (cartContinue) {
 
 
 /* =========================================================
+   CHECKOUT
+   SIN WHATSAPP
+========================================================= */
+
+if (cartCheckout) {
+
+    /*
+       Eliminamos cualquier onclick
+       antiguo que pudiera existir
+       en el HTML.
+    */
+
+    cartCheckout.removeAttribute(
+        "onclick"
+    );
+
+
+    cartCheckout.addEventListener(
+        "click",
+        event => {
+
+            event.preventDefault();
+
+
+            if (cart.length === 0) {
+
+                return;
+
+            }
+
+
+            /*
+               STRIPE SE CONECTARÁ AQUÍ.
+
+               NO SE ENVÍA A WHATSAPP.
+
+               NO SE PROCESA EL PAGO
+               DESDE EL FRONTEND.
+
+               Después conectaremos este
+               botón con nuestro backend
+               de Stripe.
+            */
+
+            console.log(
+                "Carrito listo para Stripe:",
+                cart
+            );
+
+
+            alert(
+                "El checkout de Stripe será conectado en el siguiente paso."
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   ABRIR PRODUCTO
+========================================================= */
+
+function openProduct(productId) {
+
+    const product =
+        products.find(
+            item =>
+                item.id === productId
+        );
+
+
+    if (
+        !product ||
+        !productModal
+    ) {
+
+        return;
+
+    }
+
+
+    currentProduct =
+        product;
+
+
+    currentType =
+        "playera";
+
+
+    currentSize =
+        "M";
+
+
+    modalImage.src =
+        product.image;
+
+
+    modalImage.alt =
+        product.name;
+
+
+    modalCollection.textContent =
+        product.collection;
+
+
+    modalName.textContent =
+        product.name;
+
+
+    modalDescription.textContent =
+        product.description;
+
+
+    updateProductTypeButtons();
+
+    updateSizeButtons();
+
+
+    productModal.classList.add(
+        "open"
+    );
+
+
+    document.body.classList.add(
+        "modal-open"
+    );
+
+}
+
+
+/* =========================================================
+   CERRAR PRODUCTO
+========================================================= */
+
+function closeProduct() {
+
+    if (!productModal) return;
+
+
+    productModal.classList.remove(
+        "open"
+    );
+
+
+    document.body.classList.remove(
+        "modal-open"
+    );
+
+}
+
+
+/* =========================================================
+   TIPO DE PRODUCTO
+========================================================= */
+
+function updateProductTypeButtons() {
+
+    const typeButtons =
+        document.querySelectorAll(
+            ".type-button"
+        );
+
+
+    typeButtons.forEach(
+        button => {
+
+            const type =
+                button.dataset.type;
+
+
+            button.classList.toggle(
+                "active",
+                type === currentType
+            );
+
+
+            const price =
+                button.querySelector(
+                    "strong"
+                );
+
+
+            if (price) {
+
+                price.textContent =
+                    `$${prices[type]}`;
+
+            }
+
+        }
+    );
+
+
+    if (preorderBtn) {
+
+        /*
+           Ya no dice WhatsApp.
+        */
+
+        preorderBtn.innerHTML = `
+
+            <span>
+                AÑADIR AL CARRITO
+            </span>
+
+            <span>
+                + →
+            </span>
+
+        `;
+
+    }
+
+}
+
+
+/* =========================================================
+   PLAYERA / SUDADERA
+========================================================= */
+
+document.addEventListener(
+    "click",
+    event => {
+
+        const button =
+            event.target.closest(
+                ".type-button"
+            );
+
+
+        if (!button) return;
+
+
+        currentType =
+            button.dataset.type;
+
+
+        updateProductTypeButtons();
+
+    }
+);
+
+
+/* =========================================================
+   TALLAS
+========================================================= */
+
+function updateSizeButtons() {
+
+    if (!sizes) return;
+
+
+    const sizeButtons =
+        sizes.querySelectorAll(
+            "button"
+        );
+
+
+    sizeButtons.forEach(
+        button => {
+
+            button.classList.toggle(
+                "active",
+                button.textContent.trim() ===
+                currentSize
+            );
+
+        }
+    );
+
+}
+
+
+if (sizes) {
+
+    sizes.addEventListener(
+        "click",
+        event => {
+
+            const button =
+                event.target.closest(
+                    "button"
+                );
+
+
+            if (!button) return;
+
+
+            currentSize =
+                button.textContent.trim();
+
+
+            updateSizeButtons();
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   AÑADIR PRODUCTO
+========================================================= */
+
+if (preorderBtn) {
+
+    /*
+       Eliminamos cualquier
+       onclick antiguo.
+    */
+
+    preorderBtn.removeAttribute(
+        "onclick"
+    );
+
+
+    preorderBtn.addEventListener(
+        "click",
+        event => {
+
+            event.preventDefault();
+
+
+            if (!currentProduct) {
+
+                return;
+
+            }
+
+
+            addToCart(
+                currentProduct,
+                currentType,
+                currentSize,
+                1
+            );
+
+
+            closeProduct();
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   FILTROS
+========================================================= */
+
+const filterButtons =
+    document.querySelectorAll(
+        ".filter"
+    );
+
+
+filterButtons.forEach(
+    button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                currentFilter =
+                    button.dataset.filter;
+
+
+                filterButtons.forEach(
+                    item => {
+
+                        item.classList.remove(
+                            "active"
+                        );
+
+                    }
+                );
+
+
+                button.classList.add(
+                    "active"
+                );
+
+
+                renderProducts();
+
+            }
+        );
+
+    }
+);
+
+
+/* =========================================================
+   FILTRAR COLECCIÓN
+========================================================= */
+
+function filterCollection(
+    collection
+) {
+
+    currentCollection =
+        collection;
+
+
+    currentFilter =
+        "all";
+
+
+    filterButtons.forEach(
+        button => {
+
+            button.classList.remove(
+                "active"
+            );
+
+        }
+    );
+
+
+    const allButton =
+        document.querySelector(
+            '.filter[data-filter="all"]'
+        );
+
+
+    if (allButton) {
+
+        allButton.classList.add(
+            "active"
+        );
+
+    }
+
+
+    renderProducts();
+
+
+    const shop =
+        document.getElementById(
+            "shop"
+        );
+
+
+    if (shop) {
+
+        shop.scrollIntoView({
+            behavior: "smooth"
+        });
+
+    }
+
+}
+
+
+/* =========================================================
+   MENÚ MOBILE
+========================================================= */
+
+if (
+    menuButton &&
+    mobileMenu
+) {
+
+    menuButton.addEventListener(
+        "click",
+        () => {
+
+            mobileMenu.classList.add(
+                "open"
+            );
+
+
+            document.body.classList.add(
+                "menu-open"
+            );
+
+        }
+    );
+
+}
+
+
+if (
+    mobileClose &&
+    mobileMenu
+) {
+
+    mobileClose.addEventListener(
+        "click",
+        () => {
+
+            mobileMenu.classList.remove(
+                "open"
+            );
+
+
+            document.body.classList.remove(
+                "menu-open"
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   CERRAR MENÚ AL NAVEGAR
+========================================================= */
+
+if (mobileMenu) {
+
+    const mobileLinks =
+        mobileMenu.querySelectorAll(
+            "a"
+        );
+
+
+    mobileLinks.forEach(
+        link => {
+
+            link.addEventListener(
+                "click",
+                () => {
+
+                    mobileMenu.classList.remove(
+                        "open"
+                    );
+
+
+                    document.body.classList.remove(
+                        "menu-open"
+                    );
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   ESC
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            closeProduct();
+
+            closeCart();
+
+
+            if (mobileMenu) {
+
+                mobileMenu.classList.remove(
+                    "open"
+                );
+
+            }
+
+
+            document.body.classList.remove(
+                "menu-open"
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+window.addEventListener(
+    "load",
+    () => {
+
+        setTimeout(
+            () => {
+
+                if (intro) {
+
+                    intro.classList.add(
+                        "hidden"
+                    );
+
+                }
+
+
+                if (siteHeader) {
+
+                    siteHeader.classList.add(
+                        "visible"
+                    );
+
+                }
+
+            },
+            1800
+        );
+
+    }
+);
+
+
+/* =========================================================
+   REVEAL
+========================================================= */
+
+function initializeReveal() {
+
+    const elements =
+        document.querySelectorAll(
+            ".reveal:not(.visible)"
+        );
+
+
+    if (
+        !(
+            "IntersectionObserver"
+            in window
+        )
+    ) {
+
+        elements.forEach(
+            element => {
+
+                element.classList.add(
+                    "visible"
+                );
+
+            }
+        );
+
+        return;
+
+    }
+
+
+    const observer =
+        new IntersectionObserver(
+            entries => {
+
+                entries.forEach(
+                    entry => {
+
+                        if (
+                            entry.isIntersecting
+                        ) {
+
+                            entry.target.classList.add(
+                                "visible"
+                            );
+
+
+                            observer.unobserve(
+                                entry.target
+                            );
+
+                        }
+
+                    }
+                );
+
+            },
+            {
+                threshold: 0.12
+            }
+        );
+
+
+    elements.forEach(
+        element => {
+
+            observer.observe(
+                element
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
    RENDER PRODUCTOS
 ========================================================= */
 
@@ -722,33 +1504,45 @@ function renderProducts() {
 
     if (!productGrid) return;
 
-    productGrid.innerHTML = "";
+
+    productGrid.innerHTML =
+        "";
 
 
     const filteredProducts =
-        products.filter(product => {
+        products.filter(
+            product => {
 
-            const collectionMatch =
-                currentCollection === "all" ||
-                product.collectionId === currentCollection;
-
-
-            const typeMatch =
-                currentFilter === "all" ||
-                product.type === currentFilter;
+                const collectionMatch =
+                    currentCollection ===
+                        "all" ||
+                    product.collectionId ===
+                        currentCollection;
 
 
-            return collectionMatch &&
-                   typeMatch;
+                const typeMatch =
+                    currentFilter ===
+                        "all" ||
+                    product.type ===
+                        currentFilter;
 
-        });
+
+                return (
+                    collectionMatch &&
+                    typeMatch
+                );
+
+            }
+        );
 
 
     filteredProducts.forEach(
         (product, index) => {
 
             const card =
-                document.createElement("article");
+                document.createElement(
+                    "article"
+                );
 
 
             card.className =
@@ -816,7 +1610,9 @@ function renderProducts() {
             `;
 
 
-            productGrid.appendChild(card);
+            productGrid.appendChild(
+                card
+            );
 
         }
     );
@@ -833,596 +1629,28 @@ function renderProducts() {
 
 
 /* =========================================================
-   CONTADOR SHOP
+   SHOP COUNT
 ========================================================= */
 
-function updateShopCount(count) {
+function updateShopCount(
+    count
+) {
 
     const counter =
-        document.querySelector(".shop-count");
+        document.querySelector(
+            ".shop-count"
+        );
 
 
     if (!counter) return;
 
 
     counter.textContent =
-        String(count).padStart(2, "0") +
+        String(count).padStart(
+            2,
+            "0"
+        ) +
         " ARTEFACTOS";
-
-}
-
-
-/* =========================================================
-   ABRIR PRODUCTO
-========================================================= */
-
-function openProduct(productId) {
-
-    const product =
-        products.find(
-            item => item.id === productId
-        );
-
-
-    if (!product || !productModal) return;
-
-
-    currentProduct = product;
-
-    currentType = "playera";
-
-    currentSize = "M";
-
-
-    modalImage.src =
-        product.image;
-
-
-    modalImage.alt =
-        product.name;
-
-
-    modalCollection.textContent =
-        product.collection;
-
-
-    modalName.textContent =
-        product.name;
-
-
-    modalDescription.textContent =
-        product.description;
-
-
-    updateProductTypeButtons();
-
-    updateSizeButtons();
-
-
-    productModal.classList.add("open");
-
-    document.body.classList.add(
-        "modal-open"
-    );
-
-}
-
-
-/* =========================================================
-   CERRAR PRODUCTO
-========================================================= */
-
-function closeProduct() {
-
-    if (!productModal) return;
-
-
-    productModal.classList.remove(
-        "open"
-    );
-
-    document.body.classList.remove(
-        "modal-open"
-    );
-
-}
-
-
-/* =========================================================
-   PRODUCTO / PRECIO
-========================================================= */
-
-function updateProductTypeButtons() {
-
-    const typeButtons =
-        document.querySelectorAll(
-            ".type-button"
-        );
-
-
-    typeButtons.forEach(button => {
-
-        const type =
-            button.dataset.type;
-
-
-        button.classList.toggle(
-            "active",
-            type === currentType
-        );
-
-
-        const price =
-            button.querySelector("strong");
-
-
-        if (price) {
-
-            price.textContent =
-                `$${prices[type]}`;
-
-        }
-
-    });
-
-
-    if (preorderBtn) {
-
-        preorderBtn.innerHTML = `
-
-            <span>
-                AÑADIR AL CARRITO
-            </span>
-
-            <span>
-                + →
-            </span>
-
-        `;
-
-    }
-
-}
-
-
-/* =========================================================
-   BOTONES PLAYERA / SUDADERA
-========================================================= */
-
-document.addEventListener(
-    "click",
-    event => {
-
-        const button =
-            event.target.closest(
-                ".type-button"
-            );
-
-
-        if (!button) return;
-
-
-        currentType =
-            button.dataset.type;
-
-
-        updateProductTypeButtons();
-
-    }
-);
-
-
-/* =========================================================
-   TALLAS
-========================================================= */
-
-function updateSizeButtons() {
-
-    if (!sizes) return;
-
-
-    const sizeButtons =
-        sizes.querySelectorAll(
-            "button"
-        );
-
-
-    sizeButtons.forEach(button => {
-
-        button.classList.toggle(
-            "active",
-            button.textContent.trim() ===
-            currentSize
-        );
-
-    });
-
-}
-
-
-if (sizes) {
-
-    sizes.addEventListener(
-        "click",
-        event => {
-
-            const button =
-                event.target.closest(
-                    "button"
-                );
-
-
-            if (!button) return;
-
-
-            currentSize =
-                button.textContent.trim();
-
-
-            updateSizeButtons();
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   AÑADIR AL CARRITO
-========================================================= */
-
-if (preorderBtn) {
-
-    preorderBtn.addEventListener(
-        "click",
-        () => {
-
-            if (!currentProduct) return;
-
-
-            addToCart(
-                currentProduct,
-                currentType,
-                currentSize,
-                1
-            );
-
-
-            closeProduct();
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   FILTROS SHOP
-========================================================= */
-
-const filterButtons =
-    document.querySelectorAll(
-        ".filter"
-    );
-
-
-filterButtons.forEach(button => {
-
-    button.addEventListener(
-        "click",
-        () => {
-
-            currentFilter =
-                button.dataset.filter;
-
-
-            filterButtons.forEach(
-                item => {
-
-                    item.classList.remove(
-                        "active"
-                    );
-
-                }
-            );
-
-
-            button.classList.add(
-                "active"
-            );
-
-
-            renderProducts();
-
-        }
-    );
-
-});
-
-
-/* =========================================================
-   FILTRAR COLECCIÓN
-========================================================= */
-
-function filterCollection(collection) {
-
-    currentCollection =
-        collection;
-
-
-    currentFilter =
-        "all";
-
-
-    filterButtons.forEach(
-        button => {
-
-            button.classList.remove(
-                "active"
-            );
-
-        }
-    );
-
-
-    const allButton =
-        document.querySelector(
-            '.filter[data-filter="all"]'
-        );
-
-
-    if (allButton) {
-
-        allButton.classList.add(
-            "active"
-        );
-
-    }
-
-
-    renderProducts();
-
-
-    const shop =
-        document.getElementById(
-            "shop"
-        );
-
-
-    if (shop) {
-
-        shop.scrollIntoView({
-            behavior: "smooth"
-        });
-
-    }
-
-}
-
-
-/* =========================================================
-   MENÚ MOBILE
-========================================================= */
-
-if (menuButton && mobileMenu) {
-
-    menuButton.addEventListener(
-        "click",
-        () => {
-
-            mobileMenu.classList.add(
-                "open"
-            );
-
-
-            document.body.classList.add(
-                "menu-open"
-            );
-
-        }
-    );
-
-}
-
-
-if (mobileClose && mobileMenu) {
-
-    mobileClose.addEventListener(
-        "click",
-        () => {
-
-            mobileMenu.classList.remove(
-                "open"
-            );
-
-
-            document.body.classList.remove(
-                "menu-open"
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   CERRAR MENÚ AL NAVEGAR
-========================================================= */
-
-if (mobileMenu) {
-
-    const mobileLinks =
-        mobileMenu.querySelectorAll(
-            "a"
-        );
-
-
-    mobileLinks.forEach(link => {
-
-        link.addEventListener(
-            "click",
-            () => {
-
-                mobileMenu.classList.remove(
-                    "open"
-                );
-
-
-                document.body.classList.remove(
-                    "menu-open"
-                );
-
-            }
-        );
-
-    });
-
-}
-
-
-/* =========================================================
-   ESC
-========================================================= */
-
-document.addEventListener(
-    "keydown",
-    event => {
-
-        if (event.key === "Escape") {
-
-            closeProduct();
-
-            closeCart();
-
-
-            if (mobileMenu) {
-
-                mobileMenu.classList.remove(
-                    "open"
-                );
-
-            }
-
-
-            document.body.classList.remove(
-                "menu-open"
-            );
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   INTRO
-========================================================= */
-
-window.addEventListener(
-    "load",
-    () => {
-
-        setTimeout(
-            () => {
-
-                if (intro) {
-
-                    intro.classList.add(
-                        "hidden"
-                    );
-
-                }
-
-
-                if (siteHeader) {
-
-                    siteHeader.classList.add(
-                        "visible"
-                    );
-
-                }
-
-            },
-            1800
-        );
-
-    }
-);
-
-
-/* =========================================================
-   REVEAL ANIMATIONS
-========================================================= */
-
-function initializeReveal() {
-
-    const elements =
-        document.querySelectorAll(
-            ".reveal:not(.visible)"
-        );
-
-
-    if (
-        !("IntersectionObserver" in window)
-    ) {
-
-        elements.forEach(
-            element => {
-
-                element.classList.add(
-                    "visible"
-                );
-
-            }
-        );
-
-        return;
-
-    }
-
-
-    const observer =
-        new IntersectionObserver(
-            entries => {
-
-                entries.forEach(
-                    entry => {
-
-                        if (
-                            entry.isIntersecting
-                        ) {
-
-                            entry.target.classList.add(
-                                "visible"
-                            );
-
-
-                            observer.unobserve(
-                                entry.target
-                            );
-
-                        }
-
-                    }
-                );
-
-            },
-            {
-                threshold: 0.12
-            }
-        );
-
-
-    elements.forEach(
-        element => {
-
-            observer.observe(
-                element
-            );
-
-        }
-    );
 
 }
 
@@ -1446,7 +1674,7 @@ document.addEventListener(
 
 
 /* =========================================================
-   EXPORTS GLOBALES
+   EXPORTS
 ========================================================= */
 
 window.openProduct =
@@ -1462,4 +1690,10 @@ window.changeCartQuantity =
     changeCartQuantity;
 
 window.removeFromCart =
-    removeFromCart; 
+    removeFromCart;
+
+window.openCart =
+    openCart;
+
+window.closeCart =
+    closeCart; 
