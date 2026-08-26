@@ -3688,3 +3688,560 @@ body::before {
 .product-price strong {
     color: #C9A227 !important;
 }
+/* =========================================================
+   SWEETPAIN — CART BUTTONS
+========================================================= */
+
+
+/* =========================================================
+   BOTÓN AÑADIR AL CARRITO
+========================================================= */
+
+.preorder-button {
+    width: 100%;
+    min-height: 58px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 22px;
+
+    border: 1px solid rgba(212, 175, 55, 0.45);
+
+    background:
+        linear-gradient(
+            135deg,
+            #171717 0%,
+            #0b0b0b 100%
+        );
+
+    color: #e6c76a;
+
+    font-family: "Inter", sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 0.18em;
+
+    cursor: pointer;
+
+    position: relative;
+
+    overflow: hidden;
+
+    transition:
+        color 0.3s ease,
+        border-color 0.3s ease,
+        transform 0.3s ease,
+        background 0.3s ease;
+}
+
+
+.preorder-button::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -100%;
+
+    width: 100%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(230, 199, 106, 0.12),
+            transparent
+        );
+
+    transition:
+        left 0.6s ease;
+
+}
+
+
+.preorder-button:hover::before {
+
+    left: 100%;
+
+}
+
+
+.preorder-button:hover {
+
+    border-color: #e6c76a;
+
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1b1b1b,
+            #111111
+        );
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+.preorder-button:active {
+
+    transform:
+        translateY(0);
+
+}
+
+
+/* TEXTO DEL BOTÓN */
+
+.preorder-button span:first-child {
+
+    position: relative;
+
+}
+
+
+.preorder-button span:last-child {
+
+    font-size: 18px;
+
+    line-height: 1;
+
+    transition:
+        transform 0.3s ease;
+
+}
+
+
+.preorder-button:hover
+span:last-child {
+
+    transform:
+        translateX(5px);
+
+}
+
+
+/* =========================================================
+   BOTÓN CHECKOUT
+========================================================= */
+
+#cartCheckout {
+
+    width: 100%;
+
+    min-height: 60px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 24px;
+
+    border: 1px solid #c9a84c;
+
+    background:
+        linear-gradient(
+            135deg,
+            #c9a84c,
+            #8e702c
+        );
+
+    color: #050505;
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.2em;
+
+    cursor: pointer;
+
+    position: relative;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        filter 0.3s ease;
+
+}
+
+
+/* BRILLO */
+
+#cartCheckout::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: -120%;
+
+    width: 80%;
+
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,0.35),
+            transparent
+        );
+
+    transform:
+        skewX(-20deg);
+
+    transition:
+        left 0.7s ease;
+
+}
+
+
+#cartCheckout:hover::before {
+
+    left: 140%;
+
+}
+
+
+#cartCheckout:hover {
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 12px 35px rgba(201,168,76,0.18);
+
+    filter:
+        brightness(1.08);
+
+}
+
+
+#cartCheckout:active {
+
+    transform:
+        translateY(0);
+
+}
+
+
+/* DESHABILITADO */
+
+#cartCheckout:disabled {
+
+    opacity: 0.35;
+
+    cursor: not-allowed;
+
+    transform: none;
+
+    box-shadow: none;
+
+}
+
+
+/* =========================================================
+   BOTONES + / -
+========================================================= */
+
+.cart-quantity {
+
+    display: flex;
+
+    align-items: center;
+
+    border: 1px solid rgba(255,255,255,0.12);
+
+    background: #0a0a0a;
+
+}
+
+
+.cart-quantity button {
+
+    width: 32px;
+
+    height: 32px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: 0;
+
+    background: transparent;
+
+    color: #c9a84c;
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+
+}
+
+
+.cart-quantity button:hover {
+
+    background: #c9a84c;
+
+    color: #050505;
+
+}
+
+
+.cart-quantity span {
+
+    min-width: 32px;
+
+    text-align: center;
+
+    color: #ffffff;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+}
+
+
+/* =========================================================
+   ELIMINAR
+========================================================= */
+
+.cart-remove {
+
+    margin-top: 7px;
+
+    padding: 0;
+
+    border: 0;
+
+    background: transparent;
+
+    color: rgba(255,255,255,0.35);
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 8px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.15em;
+
+    cursor: pointer;
+
+    transition:
+        color 0.2s ease;
+
+}
+
+
+.cart-remove:hover {
+
+    color: #ffffff;
+
+}
+
+
+/* =========================================================
+   BOTÓN CONTINUAR COMPRANDO
+========================================================= */
+
+#cartContinue {
+
+    width: 100%;
+
+    min-height: 48px;
+
+    border: 1px solid rgba(255,255,255,0.12);
+
+    background: transparent;
+
+    color: rgba(255,255,255,0.6);
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.18em;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.3s ease,
+        color 0.3s ease,
+        background 0.3s ease;
+
+}
+
+
+#cartContinue:hover {
+
+    border-color: rgba(201,168,76,0.5);
+
+    color: #c9a84c;
+
+    background:
+        rgba(201,168,76,0.03);
+
+}
+
+
+/* =========================================================
+   BOTÓN CERRAR CARRITO
+========================================================= */
+
+#cartClose {
+
+    width: 40px;
+
+    height: 40px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: 1px solid rgba(255,255,255,0.1);
+
+    background: transparent;
+
+    color: rgba(255,255,255,0.6);
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.25s ease,
+        color 0.25s ease,
+        transform 0.25s ease;
+
+}
+
+
+#cartClose:hover {
+
+    border-color: #c9a84c;
+
+    color: #c9a84c;
+
+    transform:
+        rotate(90deg);
+
+}
+
+
+/* =========================================================
+   CONTADOR DEL CARRITO
+========================================================= */
+
+#cartCount {
+
+    min-width: 18px;
+
+    height: 18px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #c9a84c;
+
+    color: #050505;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    line-height: 1;
+
+}
+
+
+/* =========================================================
+   MICRO INTERACCIÓN
+========================================================= */
+
+.cart-item {
+
+    transition:
+        border-color 0.3s ease,
+        transform 0.3s ease;
+
+}
+
+
+.cart-item:hover {
+
+    border-color:
+        rgba(201,168,76,0.25);
+
+    transform:
+        translateX(-2px);
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .preorder-button {
+
+        min-height: 54px;
+
+        padding: 0 18px;
+
+    }
+
+
+    #cartCheckout {
+
+        min-height: 56px;
+
+        padding: 0 20px;
+
+    }
+
+
+    .cart-quantity button {
+
+        width: 30px;
+
+        height: 30px;
+
+    }
+
+}
