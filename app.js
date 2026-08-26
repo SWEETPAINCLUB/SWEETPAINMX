@@ -1785,3 +1785,82 @@ window.openCart =
 
 window.closeCart =
     closeCart; 
+// =====================================================
+// STRIPE — PAGO EXITOSO
+// =====================================================
+
+const paymentParams = new URLSearchParams(window.location.search);
+
+if (paymentParams.get("payment") === "success") {
+
+  document.body.innerHTML = `
+    <div style="
+      min-height:100vh;
+      background:#050505;
+      color:#f5f0e8;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:30px;
+      font-family:Arial,sans-serif;
+    ">
+
+      <div style="max-width:500px;">
+
+        <div style="
+          font-size:60px;
+          margin-bottom:20px;
+        ">
+          ✓
+        </div>
+
+        <div style="
+          letter-spacing:5px;
+          font-size:14px;
+          margin-bottom:15px;
+        ">
+          SWEETPAIN CLUB
+        </div>
+
+        <h1 style="
+          font-size:42px;
+          letter-spacing:2px;
+          margin:0 0 20px;
+        ">
+          PAYMENT CONFIRMED
+        </h1>
+
+        <p style="
+          color:#aaa;
+          font-size:16px;
+          line-height:1.6;
+          margin-bottom:35px;
+        ">
+          Gracias por tu compra.<br>
+          Tu pedido ha sido recibido correctamente.
+        </p>
+
+        <button
+          onclick="window.location.href='https://sweetpainclub.github.io/'"
+          style="
+            background:#f5f0e8;
+            color:#050505;
+            border:0;
+            padding:16px 28px;
+            font-weight:bold;
+            letter-spacing:2px;
+            cursor:pointer;
+          "
+        >
+          VOLVER A SWEETPAIN
+        </button>
+
+      </div>
+
+    </div>
+  `;
+
+  // Evita que el carrito anterior permanezca guardado
+  localStorage.removeItem("sweetpain_cart");
+}
