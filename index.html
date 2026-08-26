@@ -127,8 +127,26 @@
         </button>
 
     </header>
+    
+<!-- CART -->
+<button
+    class="cart-button"
+    id="cartButton"
+    aria-label="Abrir carrito"
+>
 
+    <span class="cart-icon">
+        BAG
+    </span>
 
+    <span
+        class="cart-count"
+        id="cartCount"
+    >
+        0
+    </span>
+
+</button> 
 
     <!-- =====================================================
          MOBILE MENU
@@ -1039,7 +1057,138 @@
 
     </div>
 
+<!-- =====================================================
+     CART
+====================================================== -->
 
+<div
+    class="cart-overlay"
+    id="cartOverlay"
+></div>
+
+
+<aside
+    class="cart-drawer"
+    id="cartDrawer"
+    aria-label="Carrito de compra"
+>
+
+
+    <!-- HEADER -->
+
+    <div class="cart-header">
+
+        <div>
+
+            <span class="eyebrow">
+                SWEETPAIN
+            </span>
+
+            <h2>
+                TU CARRITO
+            </h2>
+
+        </div>
+
+
+        <button
+            class="cart-close"
+            id="cartClose"
+            aria-label="Cerrar carrito"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+    <!-- ITEMS -->
+
+    <div
+        class="cart-items"
+        id="cartItems"
+    >
+
+        <!--
+            Los productos se insertarán
+            dinámicamente desde app.js.
+        -->
+
+    </div>
+
+
+    <!-- EMPTY -->
+
+    <div
+        class="cart-empty"
+        id="cartEmpty"
+    >
+
+        <span>
+            YOUR CART IS EMPTY
+        </span>
+
+        <p>
+            TODAVÍA NO HAS AÑADIDO
+            NINGÚN ARTEFACTO.
+        </p>
+
+        <button
+            class="cart-continue"
+            id="cartContinue"
+        >
+            EXPLORAR SHOP →
+        </button>
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <div class="cart-footer">
+
+
+        <div class="cart-total-row">
+
+            <span>
+                TOTAL
+            </span>
+
+            <strong id="cartTotal">
+                $0 MXN
+            </strong>
+
+        </div>
+
+
+        <button
+            class="cart-checkout"
+            id="cartCheckout"
+        >
+
+            <span>
+                PROCEDER AL PAGO
+            </span>
+
+            <span>
+                →
+            </span>
+
+        </button>
+
+
+        <div class="cart-note">
+
+            PAGOS SEGUROS CON STRIPE
+            <br>
+            PRECIOS EN MXN
+
+        </div>
+
+    </div>
+
+</aside>
+    
     <!-- JAVASCRIPT -->
 
     <script src="app.js"></script>
