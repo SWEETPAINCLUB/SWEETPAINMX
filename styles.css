@@ -4473,3 +4473,392 @@ span:last-child {
     background-color: inherit;
 
 }
+/* =========================================================
+   SWEETPAIN — CART REAL STYLING
+   SELECTORES BASADOS EN EL HTML REAL
+========================================================= */
+
+
+/* =========================================================
+   CART DRAWER
+========================================================= */
+
+#cartDrawer.cart-drawer {
+
+    background: #080808 !important;
+
+    color: #ffffff !important;
+
+    border-left: 1px solid rgba(201, 168, 76, 0.18);
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+#cartDrawer .cart-header {
+
+    background: #080808 !important;
+
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+
+}
+
+
+/* =========================================================
+   BOTÓN CERRAR
+========================================================= */
+
+#cartDrawer .cart-close,
+#cartDrawer #cartClose {
+
+    width: 42px !important;
+
+    height: 42px !important;
+
+    display: flex !important;
+
+    align-items: center !important;
+
+    justify-content: center !important;
+
+    padding: 0 !important;
+
+    background: #0d0d0d !important;
+
+    background-color: #0d0d0d !important;
+
+    color: #c9a84c !important;
+
+    border: 1px solid rgba(201,168,76,0.35) !important;
+
+    border-radius: 0 !important;
+
+    cursor: pointer !important;
+
+    transition:
+        all 0.25s ease !important;
+
+}
+
+
+#cartDrawer .cart-close:hover,
+#cartDrawer #cartClose:hover {
+
+    background: #c9a84c !important;
+
+    background-color: #c9a84c !important;
+
+    color: #050505 !important;
+
+    border-color: #c9a84c !important;
+
+    transform: rotate(90deg);
+
+}
+
+
+/* =========================================================
+   CARRITO VACÍO
+========================================================= */
+
+#cartDrawer .cart-empty {
+
+    background: transparent !important;
+
+    color: #ffffff !important;
+
+}
+
+
+#cartDrawer .cart-empty span {
+
+    color: #c9a84c !important;
+
+    font-family: "Cinzel", serif;
+
+    letter-spacing: 0.12em;
+
+}
+
+
+#cartDrawer .cart-empty p {
+
+    color: rgba(255,255,255,0.45) !important;
+
+}
+
+
+/* =========================================================
+   EXPLORAR SHOP
+========================================================= */
+
+#cartDrawer .cart-continue,
+#cartDrawer #cartContinue {
+
+    width: 100% !important;
+
+    min-height: 52px !important;
+
+    padding: 0 20px !important;
+
+    background: #0b0b0b !important;
+
+    background-color: #0b0b0b !important;
+
+    color: #c9a84c !important;
+
+    border: 1px solid rgba(201,168,76,0.45) !important;
+
+    border-radius: 0 !important;
+
+    font-family: "Inter", sans-serif !important;
+
+    font-size: 10px !important;
+
+    font-weight: 700 !important;
+
+    letter-spacing: 0.18em !important;
+
+    cursor: pointer !important;
+
+    transition:
+        all 0.3s ease !important;
+
+}
+
+
+#cartDrawer .cart-continue:hover,
+#cartDrawer #cartContinue:hover {
+
+    background: #c9a84c !important;
+
+    background-color: #c9a84c !important;
+
+    color: #050505 !important;
+
+    border-color: #c9a84c !important;
+
+}
+
+
+/* =========================================================
+   PRODUCTOS
+========================================================= */
+
+#cartDrawer .cart-item {
+
+    background: #0d0d0d !important;
+
+    border: 1px solid rgba(255,255,255,0.07);
+
+}
+
+
+#cartDrawer .cart-item h3 {
+
+    color: #ffffff !important;
+
+}
+
+
+#cartDrawer .cart-item-collection {
+
+    color: #c9a84c !important;
+
+}
+
+
+#cartDrawer .cart-item-variant {
+
+    color: rgba(255,255,255,0.45) !important;
+
+}
+
+
+/* =========================================================
+   + / -
+========================================================= */
+
+#cartDrawer .cart-quantity {
+
+    background: #080808 !important;
+
+    border: 1px solid rgba(255,255,255,0.12) !important;
+
+}
+
+
+#cartDrawer .cart-quantity button {
+
+    width: 32px !important;
+
+    height: 32px !important;
+
+    padding: 0 !important;
+
+    background: #080808 !important;
+
+    background-color: #080808 !important;
+
+    color: #c9a84c !important;
+
+    border: 0 !important;
+
+    border-radius: 0 !important;
+
+}
+
+
+#cartDrawer .cart-quantity button:hover {
+
+    background: #c9a84c !important;
+
+    background-color: #c9a84c !important;
+
+    color: #050505 !important;
+
+}
+
+
+#cartDrawer .cart-quantity span {
+
+    color: #ffffff !important;
+
+}
+
+
+/* =========================================================
+   ELIMINAR
+========================================================= */
+
+#cartDrawer .cart-remove {
+
+    background: transparent !important;
+
+    background-color: transparent !important;
+
+    color: rgba(255,255,255,0.35) !important;
+
+    border: 0 !important;
+
+}
+
+
+#cartDrawer .cart-remove:hover {
+
+    color: #c9a84c !important;
+
+}
+
+
+/* =========================================================
+   TOTAL
+========================================================= */
+
+#cartDrawer .cart-total {
+
+    background: #080808 !important;
+
+    border-top: 1px solid rgba(201,168,76,0.18);
+
+}
+
+
+#cartDrawer .cart-total strong {
+
+    color: #c9a84c !important;
+
+}
+
+
+/* =========================================================
+   CHECKOUT
+========================================================= */
+
+#cartDrawer #cartCheckout,
+#cartDrawer .cart-checkout {
+
+    width: 100% !important;
+
+    min-height: 60px !important;
+
+    padding: 0 22px !important;
+
+    background: #c9a84c !important;
+
+    background-color: #c9a84c !important;
+
+    color: #050505 !important;
+
+    border: 1px solid #c9a84c !important;
+
+    border-radius: 0 !important;
+
+    font-family: "Inter", sans-serif !important;
+
+    font-size: 10px !important;
+
+    font-weight: 800 !important;
+
+    letter-spacing: 0.2em !important;
+
+    cursor: pointer !important;
+
+    transition:
+        all 0.3s ease !important;
+
+}
+
+
+#cartDrawer #cartCheckout:hover,
+#cartDrawer .cart-checkout:hover {
+
+    background: #e1c267 !important;
+
+    background-color: #e1c267 !important;
+
+    color: #050505 !important;
+
+    transform: translateY(-2px);
+
+}
+
+
+/* =========================================================
+   CHECKOUT DESHABILITADO
+========================================================= */
+
+#cartDrawer #cartCheckout:disabled,
+#cartDrawer .cart-checkout:disabled {
+
+    opacity: 0.3 !important;
+
+    background: #555 !important;
+
+    background-color: #555 !important;
+
+    color: #111 !important;
+
+    border-color: #555 !important;
+
+    cursor: not-allowed !important;
+
+    transform: none !important;
+
+}
+
+
+/* =========================================================
+   OVERLAY
+========================================================= */
+
+#cartOverlay.cart-overlay {
+
+    background: rgba(0,0,0,0.78) !important;
+
+    backdrop-filter: blur(4px);
+
+} 
