@@ -4245,3 +4245,231 @@ span:last-child {
     }
 
 }
+/* =========================================================
+   SWEETPAIN — OVERRIDE FINAL CART
+   ELIMINAR BLANCO
+========================================================= */
+
+
+/* TODOS LOS BOTONES DEL CARRITO */
+
+.cart-drawer button,
+.cartDrawer button,
+#cartDrawer button {
+
+    font-family: "Inter", sans-serif !important;
+
+}
+
+
+/* =========================================================
+   AÑADIR AL CARRITO
+========================================================= */
+
+#preorderBtn,
+.preorder-button {
+
+    background: #0b0b0b !important;
+
+    background-color: #0b0b0b !important;
+
+    color: #c9a84c !important;
+
+    border: 1px solid #c9a84c !important;
+
+    box-shadow: none !important;
+
+}
+
+
+#preorderBtn:hover,
+.preorder-button:hover {
+
+    background: #c9a84c !important;
+
+    background-color: #c9a84c !important;
+
+    color: #050505 !important;
+
+}
+
+
+/* =========================================================
+   CHECKOUT
+========================================================= */
+
+#cartCheckout {
+
+    background: #c9a84c !important;
+
+    background-color: #c9a84c !important;
+
+    color: #050505 !important;
+
+    border: 1px solid #c9a84c !important;
+
+    box-shadow: none !important;
+
+}
+
+
+#cartCheckout:hover {
+
+    background: #e0bd5b !important;
+
+    background-color: #e0bd5b !important;
+
+    color: #050505 !important;
+
+}
+
+
+/* =========================================================
+   CONTINUAR COMPRANDO
+========================================================= */
+
+#cartContinue {
+
+    background: #0b0b0b !important;
+
+    background-color: #0b0b0b !important;
+
+    color: #c9a84c !important;
+
+    border: 1px solid rgba(201,168,76,0.35) !important;
+
+}
+
+
+#cartContinue:hover {
+
+    background: #151515 !important;
+
+    background-color: #151515 !important;
+
+    color: #e0bd5b !important;
+
+}
+
+
+/* =========================================================
+   + / -
+========================================================= */
+
+.cart-quantity button {
+
+    background: #0b0b0b !important;
+
+    background-color: #0b0b0b !important;
+
+    color: #c9a84c !important;
+
+    border: 0 !important;
+
+}
+
+
+.cart-quantity button:hover {
+
+    background: #c9a84c !important;
+
+    background-color: #c9a84c !important;
+
+    color: #050505 !important;
+
+}
+
+
+/* =========================================================
+   ELIMINAR
+========================================================= */
+
+.cart-remove {
+
+    background: transparent !important;
+
+    background-color: transparent !important;
+
+    color: rgba(255,255,255,0.4) !important;
+
+    border: 0 !important;
+
+}
+
+
+.cart-remove:hover {
+
+    color: #c9a84c !important;
+
+}
+
+
+/* =========================================================
+   CERRAR
+========================================================= */
+
+#cartClose {
+
+    background: #0b0b0b !important;
+
+    background-color: #0b0b0b !important;
+
+    color: #c9a84c !important;
+
+    border: 1px solid rgba(201,168,76,0.3) !important;
+
+}
+
+
+#cartClose:hover {
+
+    background: #c9a84c !important;
+
+    background-color: #c9a84c !important;
+
+    color: #050505 !important;
+
+}
+
+
+/* =========================================================
+   CONTADOR
+========================================================= */
+
+#cartCount {
+
+    background: #c9a84c !important;
+
+    color: #050505 !important;
+
+}
+
+
+/* =========================================================
+   TEXTO DEL CARRITO
+========================================================= */
+
+.cart-drawer,
+.cartDrawer {
+
+    background: #080808 !important;
+
+    color: #ffffff !important;
+
+}
+
+
+/* =========================================================
+   EVITAR ESTILOS NATIVOS
+========================================================= */
+
+.cart-drawer button:focus,
+.cart-drawer button:active,
+.cartDrawer button:focus,
+.cartDrawer button:active {
+
+    outline: none !important;
+
+    background-color: inherit;
+
+}
