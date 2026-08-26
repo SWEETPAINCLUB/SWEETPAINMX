@@ -1864,3 +1864,45 @@ if (paymentParams.get("payment") === "success") {
   // Evita que el carrito anterior permanezca guardado
   localStorage.removeItem("sweetpain_cart");
 }
+/* =========================================================
+   STRIPE — PAGO CANCELADO
+========================================================= */
+
+if (paymentStatus === "cancelled") {
+
+    document.body.innerHTML = `
+
+        <main class="payment-page">
+
+            <div class="payment-box">
+
+                <div class="payment-check">
+                    ×
+                </div>
+
+                <div class="payment-brand">
+                    SWEETPAIN CLUB
+                </div>
+
+                <h1>
+                    PAYMENT CANCELLED
+                </h1>
+
+                <p>
+                    El pago no fue completado.<br>
+                    Tu carrito sigue disponible.
+                </p>
+
+                <button
+                    class="payment-button"
+                    onclick="window.location.href='/?cart=open'"
+                >
+                    VOLVER AL CARRITO
+                </button>
+
+            </div>
+
+        </main>
+
+    `;
+}
