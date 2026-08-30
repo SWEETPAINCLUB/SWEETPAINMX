@@ -194,6 +194,109 @@ const products = [
         collectionId: "NARUTO",
         description: "Ambición, poder y una vida construida alrededor del valor.",
         type: "playera"
+        },
+
+
+    /* ================= COLLECTION 003 — DRAGON BALL ================= */
+
+    {
+        id: "cooler",
+        name: "SWEETPAIN X COOLER",
+        image: "assets/cooler.png",
+        collection: "COLLECTION 003 / DRAGON BALL",
+        collectionId: "DRAGON BALL",
+        description: "El emperador del universo. Poder, dominio y una presencia imposible de ignorar.",
+        type: "playera"
+    },
+
+    {
+        id: "majin-buu",
+        name: "SWEETPAIN X MAJIN BUU",
+        image: "assets/majin-buu.png",
+        collection: "COLLECTION 003 / DRAGON BALL",
+        collectionId: "DRAGON BALL",
+        description: "Caos, poder y una fuerza capaz de convertirlo todo en destrucción.",
+        type: "playera"
+    },
+
+    {
+        id: "cell",
+        name: "SWEETPAIN X CELL",
+        image: "assets/cell.png",
+        collection: "COLLECTION 003 / DRAGON BALL",
+        collectionId: "DRAGON BALL",
+        description: "Perfección. Evolución. Una amenaza diseñada para superar todos los límites.",
+        type: "playera"
+    },
+
+    {
+        id: "goku",
+        name: "SWEETPAIN X GOKU",
+        image: "assets/goku.png",
+        collection: "COLLECTION 003 / DRAGON BALL",
+        collectionId: "DRAGON BALL",
+        description: "El guerrero que nunca deja de superar sus propios límites.",
+        type: "playera"
+    },
+
+    {
+        id: "goku-black",
+        name: "SWEETPAIN X GOKU BLACK",
+        image: "assets/goku-black.png",
+        collection: "COLLECTION 003 / DRAGON BALL",
+        collectionId: "DRAGON BALL",
+        description: "Una identidad nacida del poder, la superioridad y la destrucción.",
+        type: "playera"
+    },
+
+    {
+        id: "vegeta",
+        name: "SWEETPAIN X VEGETA",
+        image: "assets/vegeta.png",
+        collection: "COLLECTION 003 / DRAGON BALL",
+        collectionId: "DRAGON BALL",
+        description: "Orgullo, disciplina y la voluntad de superar cualquier límite.",
+        type: "playera"
+    },
+
+    {
+        id: "gohan",
+        name: "SWEETPAIN X GOHAN",
+        image: "assets/gohan.png",
+        collection: "COLLECTION 003 / DRAGON BALL",
+        collectionId: "DRAGON BALL",
+        description: "El poder oculto de un guerrero que aprendió a despertar su verdadero potencial.",
+        type: "playera"
+    },
+
+    {
+        id: "piccolo",
+        name: "SWEETPAIN X PICCOLO",
+        image: "assets/piccolo.png",
+        collection: "COLLECTION 003 / DRAGON BALL",
+        collectionId: "DRAGON BALL",
+        description: "Estrategia, disciplina y una presencia que no necesita demostrar su fuerza.",
+        type: "playera"
+    },
+
+    {
+        id: "trunks",
+        name: "SWEETPAIN X TRUNKS",
+        image: "assets/trunks.png",
+        collection: "COLLECTION 003 / DRAGON BALL",
+        collectionId: "DRAGON BALL",
+        description: "Un guerrero nacido de un futuro marcado por la destrucción y la esperanza.",
+        type: "playera"
+    },
+
+    {
+        id: "mr-satan",
+        name: "SWEETPAIN X MR. SATAN",
+        image: "assets/mr-satan.png",
+        collection: "COLLECTION 003 / DRAGON BALL",
+        collectionId: "DRAGON BALL",
+        description: "El campeón mundial. Carisma, espectáculo y una confianza imposible de ignorar.",
+        type: "playera"
     }
 
 ];
