@@ -289,13 +289,96 @@ const products = [
         type: "playera"
     },
 
-    {
+        {
         id: "mr-satan",
         name: "SWEETPAIN X MR. SATAN",
         image: "assets/mr-satan.png",
         collection: "COLLECTION 003 / DRAGON BALL",
         collectionId: "DRAGON BALL",
         description: "El campeón mundial. Carisma, espectáculo y una confianza imposible de ignorar.",
+        type: "playera"
+    },
+
+
+    /* ================= COLLECTION 004 — POKÉMON ================= */
+
+    {
+        id: "gengar",
+        name: "SWEETPAIN X GENGAR",
+        image: "assets/gengar.png",
+        collection: "COLLECTION 004 / POKÉMON",
+        collectionId: "POKÉMON",
+        description: "Una presencia nacida de las sombras. Misterio, oscuridad y una identidad imposible de ignorar.",
+        type: "playera"
+    },
+
+    {
+        id: "rayquaza",
+        name: "SWEETPAIN X RAYQUAZA",
+        image: "assets/rayquaza.png",
+        collection: "COLLECTION 004 / POKÉMON",
+        collectionId: "POKÉMON",
+        description: "Una fuerza ancestral que domina los cielos.",
+        type: "playera"
+    },
+
+    {
+        id: "giratina",
+        name: "SWEETPAIN X GIRATINA",
+        image: "assets/giratina.png",
+        collection: "COLLECTION 004 / POKÉMON",
+        collectionId: "POKÉMON",
+        description: "El mundo distorsionado convertido en identidad.",
+        type: "playera"
+    },
+
+    {
+        id: "mewtwo",
+        name: "SWEETPAIN X MEWTWO",
+        image: "assets/mewtwo.png",
+        collection: "COLLECTION 004 / POKÉMON",
+        collectionId: "POKÉMON",
+        description: "Poder creado para superar todos los límites.",
+        type: "playera"
+    },
+
+    {
+        id: "hawlucha",
+        name: "SWEETPAIN X HAWLUCHA",
+        image: "assets/hawlucha.png",
+        collection: "COLLECTION 004 / POKÉMON",
+        collectionId: "POKÉMON",
+        description: "Velocidad, combate y una identidad construida para destacar.",
+        type: "playera"
+    },
+
+    {
+        id: "charizard",
+        name: "SWEETPAIN X CHARIZARD",
+        image: "assets/charizard.png",
+        collection: "COLLECTION 004 / POKÉMON",
+        collectionId: "POKÉMON",
+        description: "Fuego, poder y una presencia que no necesita presentación.",
+        type: "playera"
+    },
+
+    {
+        id: "darkrai",
+        name: "SWEETPAIN X DARKRAI",
+        image: "assets/darkrai.png",
+        collection: "COLLECTION 004 / POKÉMON",
+        collectionId: "POKÉMON",
+        description: "Una figura envuelta en oscuridad, sueños y misterio.",
+        type: "playera"
+    },
+
+    {
+        id: "greninja",
+        name: "SWEETPAIN X GRENINJA",
+        image: "assets/greninja.png",
+        collection: "COLLECTION 004 / POKÉMON",
+        collectionId: "POKÉMON",
+        description: "Precisión, velocidad y una presencia que se mueve entre las sombras.",
         type: "playera"
     }
 
